@@ -10,11 +10,9 @@
     "dev": "NODE_ENV=development webpack-dev-server --config webpack.config.development.js --progress --colors --inline",
     "prod": "NODE_ENV=production webpack --config webpack.config.production.js --progress",
     "build": "rm -rf public/dist && npm run prod",
-
     "test": "tsc && ava",
     "test:watch": "tsc -w && ava -w",
     "coverage": "nyc npm t"
-
   },
   "ava": {
     "files": [
@@ -40,6 +38,7 @@
     "css-loader": "^0.25.0",
     "enzyme": "^2.4.1",
     "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
     "jsdom": "^9.5.0",
     "node-sass": "^3.10.0",
     "nyc": "^8.3.0",
@@ -52,12 +51,15 @@
     "typescript": "^2.0.3",
     "typings": "^1.4.0",
     "uglify-save-license": "^0.4.1",
+    "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.1",
     "webpack-manifest-plugin": "^1.0.1"
   },
   "dependencies": {
     "babel-polyfill": "^6.13.0",
+    "bootstrap-sass": "^3.3.7",
+    "font-awesome": "^4.6.3",
     "lodash": "^4.16.1",
     "moment": "^2.15.1",
     "react": "^15.3.2",

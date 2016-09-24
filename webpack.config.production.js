@@ -40,7 +40,7 @@ module.exports = {
   // devtool: 'source-map',
   resolve: {
     alias: {
-      actioncable: `${__dirname}/vendor/bundle/ruby/2.3.0/gems/actioncable-5.0.0/lib/assets/compiled/action_cable.js`
+      actioncable: `${__dirname}/vendor/bundle/ruby/2.3.0/gems/actioncable-5.0.0.1/lib/assets/compiled/action_cable.js`
     },
     extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx', '.ts', '.tsx']
   },
@@ -49,10 +49,26 @@ module.exports = {
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel', 'ts']
+        loaders: ['babel', 'ts']
       },
       {
-        test: /\.s[ac]ss$/,
+        test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url?limit=10000&mimetype=application/font-woff'
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url?limit=10000&mimetype=application/octet-stream'
+      },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'file'
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url?limit=10000&mimetype=image/svg+xml'
+      },
+      {
+        test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
       }
     ]
@@ -73,15 +89,10 @@ module.exports = {
   postcss: [
     autoprefixer({
       browser: [
-        'ie >= 11',               // IE
-        'ie_mob >= 10',           // IE Mobile
-        'last 2 edge versions',   // Microsoft Edge
-        'ff >= 40',               // Firefox
-        'chrome >= 44',           // Google Chrome
-        'last 2 safari versions', // Safari
-        'ios >= 8',               // iOS
-        'android >= 4.4',         // Android
-        'bb >= 10'                // BlackBerry
+        'last 2 versions',  // without IE, iOS, Android
+        'ie >= 9',          // IE
+        'ios >= 8',         // iOS
+        'android >= 4.4'    // Android
       ]
     })
   ]

@@ -1,7 +1,20 @@
+// bootstrap-sass from npm
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+// font-awesome from npm
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
+
 html {
   font-size: 62.5%;
 }
 
 body {
   font-size: 1.4em;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }

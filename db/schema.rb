@@ -10,6 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160924125142) do
+
+  create_table "radios", force: :cascade do |t|
+    t.string   "name"
+    t.string   "url"
+    t.text     "memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["url"], name: "index_radios_on_url", unique: true
+  end
 
 end

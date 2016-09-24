@@ -1,0 +1,26 @@
+<%= form_for(radio) do |f| %>
+  <% if radio.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(radio.errors.count, "error") %> prohibited this radio from being saved:</h2>
+
+      <ul>
+      <% radio.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.label :name, '名前' %>
+    <%= f.text_field :name %>
+
+    <%= f.label :url, 'URL' %>
+    <%= f.text_field :url %>
+
+    <%= f.label :memo, 'メモ' %>
+    <%= f.text_field :memo %>
+
+    <%= f.submit %>
+  </div>
+<% end %>

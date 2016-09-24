@@ -1,0 +1,19 @@
+<%= render 'shared/navbar' %>
+
+
+<div class="container" style="margin-top: 48px;">
+  <div class="row">
+    <div class="col-md-12">
+      <h3><%= link_to '追加する', new_radio_path %></h3>
+
+      <h3>一覧</h3>
+      <ul class="list-group">
+<% @radios.each do |radio| %>
+        <li class="list-group-item">
+          <%= link_to radio.name, radio.url %>
+        </li>
+<% end %>
+      </ul>
+    </div>
+  </div>
+</div>

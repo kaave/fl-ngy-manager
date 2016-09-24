@@ -9,6 +9,7 @@
 
 <body data-controller="<%= controller_name %>" data-action="<%= action_name %>">
   <%= yield %>
+  <%= javascript_include_tag assets_path('vendor.bundle.js') %>
   <%= javascript_include_tag assets_path('admin.js') %>
 </body>
 </html>

@@ -31,11 +31,20 @@ function getEntries(files, appendFiles = []) {
  * webpack settings
  */
 module.exports = {
-  entry: getEntries([
+  entry: Object.assign({}, getEntries([
     ...glob.sync('./frontend/javascripts/*.ts'),
     ...glob.sync('./frontend/javascripts/*.tsx'),
     ...glob.sync('./frontend/stylesheets/*.scss')
-  ], ['babel-polyfill']),
+  ], ['babel-polyfill']), {
+    vendor: [
+      'jquery',
+      'moment',
+      'lodash',
+      'bootstrap-sass',
+      'react',
+      'react-dom'
+    ],
+  }),
   output: {
     filename: 'javascripts/[name].js',
     path: path.join(__dirname, 'public/dist'),
@@ -81,7 +90,15 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
-    new ExtractTextPlugin('stylesheets/[name].css')
+    new ExtractTextPlugin('stylesheets/[name].css'),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      _: 'lodash',
+      moment: 'moment'
+    }),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'javascripts/vendor.bundle.js')
   ],
   sassLoader: { sourceComments: true },
   postcss: [

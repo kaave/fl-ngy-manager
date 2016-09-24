@@ -1,0 +1,66 @@
+{
+  "name": "fl-nagoya-manager",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "index.js",
+  "scripts": {
+    "start": "bundle exec foreman start",
+    "postinstall": "typings i",
+    "typings": "typings",
+    "dev": "NODE_ENV=development webpack-dev-server --config webpack.config.development.js --progress --colors --inline",
+    "prod": "NODE_ENV=production webpack --config webpack.config.production.js --progress",
+    "build": "rm -rf public/dist && npm run prod",
+
+    "test": "tsc && ava",
+    "test:watch": "tsc -w && ava -w",
+    "coverage": "nyc npm t"
+
+  },
+  "ava": {
+    "files": [
+      "./spec/javascripts/**/*.spec.{js,jsx}"
+    ],
+    "source": [
+      "./frontend/javascripts/**/*.{ts,tsx,js,jsx}"
+    ],
+    "require": [
+      "./spec/test_helper.js"
+    ],
+    "babel": "inherit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^6.4.1",
+    "ava": "^0.16.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-latest": "^6.14.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "css-loader": "^0.25.0",
+    "enzyme": "^2.4.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "jsdom": "^9.5.0",
+    "node-sass": "^3.10.0",
+    "nyc": "^8.3.0",
+    "postcss-loader": "^0.13.0",
+    "react-addons-test-utils": "^15.3.2",
+    "sass-loader": "^4.0.2",
+    "sinon": "^1.17.6",
+    "style-loader": "^0.13.1",
+    "ts-loader": "^0.8.2",
+    "typescript": "^2.0.3",
+    "typings": "^1.4.0",
+    "uglify-save-license": "^0.4.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1",
+    "webpack-manifest-plugin": "^1.0.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.13.0",
+    "lodash": "^4.16.1",
+    "moment": "^2.15.1",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  }
+}

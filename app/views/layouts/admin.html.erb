@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= csrf_meta_tags %>
+  <title>Rails with webpack | admin</title>
+
+  <%= stylesheet_link_tag assets_path('admin.css'), media: 'all' %>
+</head>
+
+<body data-controller="<%= controller_name %>" data-action="<%= action_name %>">
+  <%= yield %>
+  <%= javascript_include_tag assets_path('admin.js') %>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "globalDependencies": {
+    "enzyme": "registry:dt/enzyme#2.4.1+20160919072335",
+    "lodash": "registry:dt/lodash#4.14.0+20160919145112",
+    "rails-actioncable": "registry:dt/rails-actioncable#0.0.0+20160720003106",
+    "react": "registry:dt/react#0.14.0+20160923124221",
+    "react-addons-test-utils": "registry:dt/react-addons-test-utils#0.14.0+20160427035638",
+    "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
+    "sinon": "registry:dt/sinon#1.16.0+20160517064723"
+  }
+}

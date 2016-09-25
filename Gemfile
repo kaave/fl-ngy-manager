@@ -33,6 +33,9 @@ gem 'dotenv-rails'
 # add initial data
 gem 'seed-fu', '~> 2.3'
 
+# add api
+gem 'grape'
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'

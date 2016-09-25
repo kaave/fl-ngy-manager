@@ -9,14 +9,31 @@ module API
     end
 
     resource :radios do
-      # descには説明を書く
-      desc 'Return all articles.'
+      desc 'Return all radios.'
       get :all do
         present Radio.all, with: RadioEntity
       end
 
+      desc 'Start radio'
+      params do
+        requires :url, type: String, desc: 'Radio url'
+      end
+      post :start do
+        if params[:url] =~ %r{\Ahttps?://[\w/:%#\$&\?\(\)~\.=\+\-]+\z} 
+          "Command: mplayer -playlist #{params[:url]}"
+        else
+          "Fail! url is invalid: #{params[:url]}"
+        end
+      end
+
+      desc 'Return all radios.'
+      get :stop do
+        system('sudo killall mplayer')
+        $CHILD_STATUS.inspect
+      end
+
       route_param :id do
-        desc 'Return a active article'
+        desc 'Return a radio'
         get do
           present Radio.find(params[:id]), with: RadioEntity
         end

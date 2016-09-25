@@ -28,11 +28,27 @@ function getEntries(files, appendFiles = []) {
  * webpack settings
  */
 module.exports = {
-  entry: getEntries([
+  entry: Object.assign({}, getEntries([
     ...glob.sync('./frontend/javascripts/*.ts'),
     ...glob.sync('./frontend/javascripts/*.tsx'),
     ...glob.sync('./frontend/stylesheets/*.scss')
-  ], ['babel-polyfill']),
+  ], ['babel-polyfill']), {
+    vendor: [
+      'babel-polyfill',
+      'jquery',
+      'moment',
+      'lodash',
+      'bootstrap-sass',
+      'react',
+      'react-dom',
+      'react-redux',
+      'react-router',
+      'redux',
+      'redux-actions',
+      'redux-logger',
+      'redux-saga'
+    ],
+  }),
   output: {
     filename: 'javascripts/[name].js',
     path: path.join(__dirname, 'public/dist')

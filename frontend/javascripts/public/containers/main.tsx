@@ -5,6 +5,7 @@ import DispatchEvents from '../types/DispatchEvents';
 
 import Navbar from '../components/navbar';
 import RadioList from '../components/radio/list';
+import RadioForm from '../components/radio/form';
 
 export interface Props {
 }
@@ -77,6 +78,7 @@ export default class Main extends React.Component<Props, State> {
         <div className="container" style={{ marginTop: '48px' }}>
           <div className="row">
             <RadioList radios={radios} dispatch={this.dispatch} />
+            <RadioForm />
           </div>
         </div>
       </main>

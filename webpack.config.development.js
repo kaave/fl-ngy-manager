@@ -37,12 +37,19 @@ module.exports = {
     ...glob.sync('./frontend/stylesheets/*.scss')
   ], ['babel-polyfill']), {
     vendor: [
+      'babel-polyfill',
       'jquery',
       'moment',
       'lodash',
       'bootstrap-sass',
       'react',
-      'react-dom'
+      'react-dom',
+      'react-redux',
+      'react-router',
+      'redux',
+      'redux-actions',
+      'redux-logger',
+      'redux-saga'
     ],
   }),
   output: {

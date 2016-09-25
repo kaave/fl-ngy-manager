@@ -64,6 +64,12 @@
     "lodash": "^4.16.1",
     "moment": "^2.15.1",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.8.1",
+    "redux": "^3.6.0",
+    "redux-actions": "^0.12.0",
+    "redux-logger": "^2.6.1",
+    "redux-saga": "^0.11.1"
   }
 }

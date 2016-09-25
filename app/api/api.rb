@@ -5,7 +5,7 @@ module API
     format :json
 
     class RadioEntity < Grape::Entity
-      expose :id, :name, :url
+      expose :id, :name, :url, :memo
     end
 
     resource :radios do

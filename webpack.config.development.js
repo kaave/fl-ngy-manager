@@ -35,7 +35,7 @@ module.exports = {
     ...glob.sync('./frontend/javascripts/*.ts'),
     ...glob.sync('./frontend/javascripts/*.tsx'),
     ...glob.sync('./frontend/stylesheets/*.scss')
-  ], ['babel-polyfill']), {
+  ], ['babel-polyfill', 'whatwg-fetch']), {
     vendor: [
       'babel-polyfill',
       'jquery',

@@ -1,5 +1,6 @@
 {
   "globalDependencies": {
+    "core-js": "registry:dt/core-js#0.0.0+20160914114559",
     "enzyme": "registry:dt/enzyme#2.4.1+20160919072335",
     "lodash": "registry:dt/lodash#4.14.0+20160919145112",
     "rails-actioncable": "registry:dt/rails-actioncable#0.0.0+20160720003106",
@@ -13,6 +14,8 @@
     "redux-actions": "registry:dt/redux-actions#0.8.0+20160521154116",
     "redux-logger": "registry:dt/redux-logger#2.6.0+20160619033847",
     "redux-saga": "registry:dt/redux-saga#0.9.1+20160703120921",
-    "sinon": "registry:dt/sinon#1.16.0+20160517064723"
+    "sinon": "registry:dt/sinon#1.16.0+20160517064723",
+    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20160829180742",
+    "whatwg-streams": "registry:dt/whatwg-streams#0.0.0+20160829180742"
   }
 }

@@ -35,6 +35,7 @@ gem 'seed-fu', '~> 2.3'
 
 # add api
 gem 'grape'
+gem 'grape-entity'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

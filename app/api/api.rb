@@ -1,23 +1,26 @@
 module API
   class Api < Grape::API
-    version 'v1', using: :path
+    prefix :api                 # add api prefix to path
+    version 'v1', using: :path  # add api version to path
     format :json
-    prefix :api
+
+    class RadioEntity < Grape::Entity
+      expose :id, :name, :url
+    end
 
     resource :radios do
       # descには説明を書く
-      desc 'Return public articles.'
+      desc 'Return all articles.'
       get :all do
-        Radio.all
+        present Radio.all, with: RadioEntity
       end
 
-      # # route_paramを使うとname spaceのように区切れる
-      # route_param :id do
-      #   desc 'Return a active article'
-      #   get do
-      #     Article.find_by(id: params[:id], status: true)
-      #   end
-      # end
+      route_param :id do
+        desc 'Return a active article'
+        get do
+          present Radio.find(params[:id]), with: RadioEntity
+        end
+      end
 
       # desc 'Create a Article'
       # # paramsにはそのメソッドで必須なパラメータを書く

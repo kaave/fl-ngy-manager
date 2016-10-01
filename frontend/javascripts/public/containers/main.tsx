@@ -1,4 +1,8 @@
 import * as React from 'react';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+
+import * as RadioActions from '../actions/radio';
 
 import Radio from '../models/radio';
 import DispatchEvents from '../types/DispatchEvents';
@@ -8,13 +12,14 @@ import RadioList from '../components/radio/list';
 import RadioForm from '../components/radio/form';
 
 export interface Props {
-}
-
-export interface State {
+  dispatch: Dispatch<{}>;
   radios: Radio[];
 }
 
-export default class Main extends React.Component<Props, State> {
+export interface State {
+}
+
+export class Main extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -40,6 +45,15 @@ export default class Main extends React.Component<Props, State> {
         break;
       case 'StopRadio':
         this.stopRadio();
+        break;
+      case 'UpdateRadioFormName':
+        this.props.dispatch(RadioActions.updateFormName(params));
+        break;
+      case 'UpdateRadioFormUrl':
+        this.props.dispatch(RadioActions.updateFormUrl(params));
+        break;
+      case 'UpdateRadioFormMemo':
+        this.props.dispatch(RadioActions.updateFormMemo(params));
         break;
       default:
         break;
@@ -70,14 +84,14 @@ export default class Main extends React.Component<Props, State> {
   }
 
   render(): JSX.Element {
-    const { radios } = this.state;
+    const { radios } = this.props;
 
     return (
       <main className="main">
         <Navbar />
         <div className="container" style={{ marginTop: '48px' }}>
           <div className="row">
-            <RadioList radios={radios} dispatch={this.dispatch} />
+            <RadioList radios={[]} dispatch={this.dispatch} />
             <RadioForm />
           </div>
         </div>
@@ -85,3 +99,7 @@ export default class Main extends React.Component<Props, State> {
     );
   }
 }
+
+const mapStateToProps = (state: Object) => (state);
+
+export default connect(mapStateToProps)(Main);

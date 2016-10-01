@@ -1,5 +1,5 @@
 interface Radio {
-  id: number;
+  id?: number;
   name: string;
   url: string;
   memo: string;

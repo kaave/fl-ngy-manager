@@ -13,6 +13,7 @@ import RadioForm from '../components/radio/form';
 
 export interface Props {
   dispatch: Dispatch<{}>;
+  formModel: Radio;
   radios: Radio[];
 }
 
@@ -38,7 +39,7 @@ export class Main extends React.Component<Props, State> {
       .then(radios => this.setState(Object.assign({}, this.state, { radios })));
   }
 
-  dispatch(type: DispatchEvents, params: any): void {
+  dispatch(type: DispatchEvents, params?: any): void {
     switch (type) {
       case 'StartRadio':
         this.startRadio(params);
@@ -54,6 +55,12 @@ export class Main extends React.Component<Props, State> {
         break;
       case 'UpdateRadioFormMemo':
         this.props.dispatch(RadioActions.updateFormMemo(params));
+        break;
+      case 'ClickSubmitRadioForm':
+        console.log(this.props.formModel);
+        break;
+      case 'ClickEraseRadioForm':
+        this.props.dispatch(RadioActions.eraseForm(params));
         break;
       default:
         break;
@@ -84,7 +91,7 @@ export class Main extends React.Component<Props, State> {
   }
 
   render(): JSX.Element {
-    const { radios } = this.props;
+    const { formModel } = this.props;
 
     return (
       <main className="main">
@@ -92,7 +99,7 @@ export class Main extends React.Component<Props, State> {
         <div className="container" style={{ marginTop: '48px' }}>
           <div className="row">
             <RadioList radios={[]} dispatch={this.dispatch} />
-            <RadioForm />
+            <RadioForm dispatch={this.dispatch} radio={formModel} />
           </div>
         </div>
       </main>

@@ -57,8 +57,10 @@
     "webpack-manifest-plugin": "^1.0.1"
   },
   "dependencies": {
+    "@types/classnames": "0.0.30",
     "babel-polyfill": "^6.13.0",
     "bootstrap-sass": "^3.3.7",
+    "classnames": "^2.2.5",
     "font-awesome": "^4.6.3",
     "jquery": "^1.12.4",
     "lodash": "^4.16.1",

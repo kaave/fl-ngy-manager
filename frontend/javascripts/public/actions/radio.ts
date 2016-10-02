@@ -4,7 +4,7 @@ const actionPrefix = 'RADIO_';
 export const UPDATE_FORM_NAME = `${actionPrefix}UPDATE_FORM_NAME`;
 export const UPDATE_FORM_URL = `${actionPrefix}UPDATE_FORM_URL`;
 export const UPDATE_FORM_MEMO = `${actionPrefix}UPDATE_FORM_MEMO`;
-export const CLEAR_FORM = `${actionPrefix}UPDATE_FORM_MEMO`;
+export const ERASE_FORM = `${actionPrefix}ERASE_FORM`;
 
 export const updateFormName = createAction<string>(
   UPDATE_FORM_NAME,
@@ -21,7 +21,7 @@ export const updateFormMemo = createAction<string>(
   (text: string) => text
 );
 
-export const clearForm = createAction<void>(
-  CLEAR_FORM,
+export const eraseForm = createAction<void>(
+  ERASE_FORM,
   () => null
 );

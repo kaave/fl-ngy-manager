@@ -3,24 +3,21 @@ import { Action } from 'redux-actions';
 import * as Actions from '../actions/radio';
 import RadioModel from '../models/radio';
 
-function getInitModel(): RadioModel {
-  return { name: '', url: '', memo: '' };
-}
-export function formValue(state: RadioModel = getInitModel(), action: Action<string>): RadioModel {
+export function formModel(state: RadioModel = new RadioModel(), action: Action<string>): RadioModel {
   switch (action.type) {
   case Actions.UPDATE_FORM_NAME:
-    return Object.assign({}, state, { name: action.payload });
+    return new RadioModel(Object.assign({}, state, { name: action.payload }));
   case Actions.UPDATE_FORM_URL:
-    return Object.assign({}, state, { url: action.payload });
+    return new RadioModel(Object.assign({}, state, { url: action.payload }));
   case Actions.UPDATE_FORM_MEMO:
-    return Object.assign({}, state, { memo: action.payload });
-  case Actions.CLEAR_FORM:
-    return getInitModel();
+    return new RadioModel(Object.assign({}, state, { memo: action.payload }));
+  case Actions.ERASE_FORM:
+    return new RadioModel();
   default:
     return state;
   }
 }
 
 export default {
-  formValue,
+  formModel,
 };

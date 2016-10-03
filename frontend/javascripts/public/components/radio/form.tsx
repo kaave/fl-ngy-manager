@@ -20,26 +20,26 @@ export default class extends React.Component<Props, {}> {
     this.handleClickErase = this.handleClickErase.bind(this);
   }
 
-  handleChangeName(e: React.FormEvent): void {
+  handleChangeName(e: React.FormEvent<HTMLInputElement>): void {
     const target = e.target as HTMLInputElement;
     this.props.dispatch('UpdateRadioFormName', target.value);
   }
 
-  handleChangeUrl(e: React.FormEvent): void {
+  handleChangeUrl(e: React.FormEvent<HTMLInputElement>): void {
     const target = e.target as HTMLInputElement;
     this.props.dispatch('UpdateRadioFormUrl', target.value);
   }
 
-  handleChangeMemo(e: React.FormEvent): void {
+  handleChangeMemo(e: React.FormEvent<HTMLTextAreaElement>): void {
     const target = e.target as HTMLInputElement;
     this.props.dispatch('UpdateRadioFormMemo', target.value);
   }
 
-  handleClickSubmit(e: React.FormEvent): void {
+  handleClickSubmit(e: React.MouseEvent<HTMLButtonElement>): void {
     this.props.dispatch('ClickSubmitRadioForm');
   }
 
-  handleClickErase(e: React.FormEvent): void {
+  handleClickErase(e: React.MouseEvent<HTMLButtonElement>): void {
     this.props.dispatch('ClickEraseRadioForm');
   }
 

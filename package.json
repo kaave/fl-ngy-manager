@@ -5,8 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "bundle exec foreman start",
-    "postinstall": "typings i",
-    "typings": "typings",
     "dev": "NODE_ENV=development webpack-dev-server --config webpack.config.development.js --progress --colors --inline",
     "prod": "NODE_ENV=production webpack --config webpack.config.production.js --progress",
     "build": "rm -rf public/dist && npm run prod",
@@ -30,6 +28,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/enzyme": "^2.4.35",
+    "@types/react-addons-test-utils": "^0.14.15",
+    "@types/sinon": "^1.16.31",
     "autoprefixer": "^6.4.1",
     "ava": "^0.16.0",
     "babel-loader": "^6.2.5",
@@ -49,7 +50,6 @@
     "style-loader": "^0.13.1",
     "ts-loader": "^0.8.2",
     "typescript": "^2.0.3",
-    "typings": "^1.4.0",
     "uglify-save-license": "^0.4.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
@@ -58,10 +58,24 @@
   },
   "dependencies": {
     "@types/classnames": "0.0.30",
+    "@types/core-js": "^0.9.34",
+    "@types/isomorphic-fetch": "0.0.31",
+    "@types/jquery": "^2.0.32",
+    "@types/lodash": "^4.14.36",
+    "@types/rails-actioncable": "0.0.21",
+    "@types/react": "^0.14.37",
+    "@types/react-dom": "^0.14.17",
+    "@types/react-redux": "^4.4.32",
+    "@types/react-router": "^2.0.36",
+    "@types/redux": "^3.5.30",
+    "@types/redux-actions": "^0.8.30",
+    "@types/redux-logger": "^2.6.32",
+    "@types/redux-saga": "^0.9.30",
     "babel-polyfill": "^6.13.0",
     "bootstrap-sass": "^3.3.7",
     "classnames": "^2.2.5",
     "font-awesome": "^4.6.3",
+    "isomorphic-fetch": "^2.2.1",
     "jquery": "^1.12.4",
     "lodash": "^4.16.1",
     "moment": "^2.15.1",
@@ -72,7 +86,6 @@
     "redux": "^3.6.0",
     "redux-actions": "^0.12.0",
     "redux-logger": "^2.6.1",
-    "redux-saga": "^0.11.1",
-    "whatwg-fetch": "^1.0.0"
+    "redux-saga": "^0.11.1"
   }
 }

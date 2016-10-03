@@ -35,7 +35,7 @@ module.exports = {
     ...glob.sync('./frontend/javascripts/*.ts'),
     ...glob.sync('./frontend/javascripts/*.tsx'),
     ...glob.sync('./frontend/stylesheets/*.scss')
-  ], ['babel-polyfill', 'whatwg-fetch']), {
+  ], ['babel-polyfill']), {
     vendor: [
       'babel-polyfill',
       'jquery',
@@ -49,7 +49,8 @@ module.exports = {
       'redux',
       'redux-actions',
       'redux-logger',
-      'redux-saga'
+      'redux-saga',
+      'whatwg-fetch'
     ],
   }),
   output: {

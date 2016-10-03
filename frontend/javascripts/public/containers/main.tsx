@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import * as fetch from 'isomorphic-fetch';
 
 import * as RadioActions from '../actions/radio';
 
@@ -26,17 +27,13 @@ export class Main extends React.Component<Props, State> {
 
     this.dispatch = this.dispatch.bind(this);
 
-    this.state = {
-      radios: []
-    };
-
     this.getAllRadios();
   }
 
   getAllRadios(): void {
     fetch('/api/v1/radios/all')
       .then(res => res.json())
-      .then(radios => this.setState(Object.assign({}, this.state, { radios })));
+      .then(radios => console.log(radios));
   }
 
   dispatch(type: DispatchEvents, params?: any): void {

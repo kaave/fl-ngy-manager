@@ -19,7 +19,7 @@ class RadioRow extends React.Component<RadioRawProps, {}> {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(_e: React.MouseEvent): void {
+  handleClick(_e: React.MouseEvent<HTMLLIElement>): void {
     this.props.dispatch('StartRadio', this.props.radio.url);
   }
 

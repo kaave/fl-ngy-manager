@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "sourceMap": false,
+    "strictNullChecks": true,
     "noImplicitAny": true,
+    "noImplicitThis": true,
     "module": "commonjs",
     "target": "es6",
     "jsx": "react"
@@ -11,10 +13,11 @@
     "app/assets/javascripts",
     "vendor/bundle"
   ],
-  "filesGlob": [
-    "typings/index.d.ts",
+  "files": [
     "node_modules/moment/moment.d.ts",
-    "node_modules/ava/index.d.ts",
+    "node_modules/ava/index.d.ts"
+  ],
+  "filesGlob": [
     "frontend/javascripts/**/*.ts",
     "frontend/javascripts/**/*.tsx",
     "spec/javascripts/**/*.ts",

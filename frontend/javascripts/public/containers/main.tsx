@@ -27,7 +27,6 @@ export class Main extends React.Component<Props, State> {
 
     this.dispatch = this.dispatch.bind(this);
 
-    // this.getAllRadios();
     this.props.dispatch(RadioActions.getRadios());
   }
 
@@ -49,7 +48,7 @@ export class Main extends React.Component<Props, State> {
         this.props.dispatch(RadioActions.updateFormMemo(params));
         break;
       case 'ClickSubmitRadioForm':
-        console.log(this.props.formModel);
+        this.props.dispatch(RadioActions.createRadio(this.props.formModel));
         break;
       case 'ClickEraseRadioForm':
         this.props.dispatch(RadioActions.eraseForm(params));

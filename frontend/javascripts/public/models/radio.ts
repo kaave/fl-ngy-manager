@@ -49,6 +49,20 @@ export default class RadioModel {
     return true;
   }
 
+  toFormData(): FormData {
+    const formData = new FormData();
+
+    formData.append('name', this.name);
+    formData.append('url', this.url);
+    formData.append('memo', this.memo);
+
+    if (this.id) {
+      formData.append('id', this.id);
+    }
+
+    return formData;
+  }
+
   toJSON(): IRadio {
     const result: IRadio = {
       name: this.name,

@@ -3,10 +3,15 @@ import { Action } from 'redux-actions';
 import * as Actions from '../actions/radio';
 import RadioModel from '../models/radio';
 
-export function radioList(state = [], { type, payload }: Action<RadioModel[]>): RadioModel[] {
+export function radioList(state = [], { type, payload }: Action<RadioModel | RadioModel[]>): RadioModel[] {
   switch (type) {
   case Actions.GET_RADIOS_SUCCESS:
     return payload as RadioModel[];
+  case Actions.CREATE_RADIO_SUCCESS:
+    return [
+      ...state,
+      payload as RadioModel
+    ];
   default:
     return state;
   }

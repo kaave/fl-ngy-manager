@@ -49,8 +49,7 @@ module.exports = {
       'redux',
       'redux-actions',
       'redux-logger',
-      'redux-saga',
-      'whatwg-fetch'
+      'redux-saga'
     ],
   }),
   output: {

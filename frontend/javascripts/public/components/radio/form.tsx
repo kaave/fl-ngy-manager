@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 
-import Radio from '../../models/radio';
+import RadioModel from '../../models/radio';
 import DispatchEvents from '../../types/DispatchEvents';
 
 export interface Props {
   dispatch: (type: DispatchEvents, params?: any) => void;
-  radio: Radio;
+  radio: RadioModel;
 }
 
 export default class extends React.Component<Props, {}> {

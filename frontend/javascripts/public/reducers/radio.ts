@@ -3,6 +3,15 @@ import { Action } from 'redux-actions';
 import * as Actions from '../actions/radio';
 import RadioModel from '../models/radio';
 
+export function radioList(state = [], { type, payload }: Action<RadioModel[]>): RadioModel[] {
+  switch (type) {
+  case Actions.GET_RADIOS_SUCCESS:
+    return payload as RadioModel[];
+  default:
+    return state;
+  }
+}
+
 export function formModel(state: RadioModel = new RadioModel(), action: Action<string>): RadioModel {
   switch (action.type) {
   case Actions.UPDATE_FORM_NAME:
@@ -19,5 +28,6 @@ export function formModel(state: RadioModel = new RadioModel(), action: Action<s
 }
 
 export default {
-  formModel,
+  radioList,
+  formModel
 };

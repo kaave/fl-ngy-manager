@@ -5,7 +5,7 @@ export interface IRadio {
   memo: string;
 };
 
-export default class Radio {
+export default class RadioModel {
   id?: number;
   name: string;
   url: string;

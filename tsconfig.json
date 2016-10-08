@@ -15,7 +15,7 @@
   ],
   "files": [
     "node_modules/moment/moment.d.ts",
-    "node_modules/ava/index.d.ts"
+    "node_modules/ava/types/generated.d.ts"
   ],
   "filesGlob": [
     "frontend/javascripts/**/*.ts",

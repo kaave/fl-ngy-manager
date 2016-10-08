@@ -1,15 +1,15 @@
 import * as React from 'react';
 
-import Radio from '../../models/radio';
+import RadioModel from '../../models/radio';
 import DispatchEvents from '../../types/DispatchEvents';
 
 export interface Props {
-  radios: Radio[];
+  radios: RadioModel[];
   dispatch: (type: DispatchEvents, params: string) => void;
 }
 
 interface RadioRawProps {
-  radio: Radio;
+  radio: RadioModel;
   dispatch: (type: DispatchEvents, params: string) => void;
 }
 

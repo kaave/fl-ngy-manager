@@ -5,7 +5,7 @@ import * as fetch from 'isomorphic-fetch';
 
 import * as RadioActions from '../actions/radio';
 
-import Radio from '../models/radio';
+import RadioModel from '../models/radio';
 import DispatchEvents from '../types/DispatchEvents';
 
 import Navbar from '../components/navbar';
@@ -14,8 +14,8 @@ import RadioForm from '../components/radio/form';
 
 export interface Props {
   dispatch: Dispatch<{}>;
-  formModel: Radio;
-  radios: Radio[];
+  formModel: RadioModel;
+  radios: RadioModel[];
 }
 
 export interface State {
@@ -27,13 +27,8 @@ export class Main extends React.Component<Props, State> {
 
     this.dispatch = this.dispatch.bind(this);
 
-    this.getAllRadios();
-  }
-
-  getAllRadios(): void {
-    fetch('/api/v1/radios/all')
-      .then(res => res.json())
-      .then(radios => console.log(radios));
+    // this.getAllRadios();
+    this.props.dispatch(RadioActions.getRadios());
   }
 
   dispatch(type: DispatchEvents, params?: any): void {

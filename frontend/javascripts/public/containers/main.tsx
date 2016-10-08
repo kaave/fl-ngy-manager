@@ -15,7 +15,7 @@ import RadioForm from '../components/radio/form';
 export interface Props {
   dispatch: Dispatch<{}>;
   formModel: RadioModel;
-  radios: RadioModel[];
+  radioList: RadioModel[];
 }
 
 export interface State {
@@ -33,10 +33,10 @@ export class Main extends React.Component<Props, State> {
   dispatch(type: DispatchEvents, params?: any): void {
     switch (type) {
       case 'StartRadio':
-        this.startRadio(params);
+        this.props.dispatch(RadioActions.startRadio(params));
         break;
       case 'StopRadio':
-        this.stopRadio();
+        this.props.dispatch(RadioActions.stopRadio());
         break;
       case 'UpdateRadioFormName':
         this.props.dispatch(RadioActions.updateFormName(params));
@@ -51,45 +51,22 @@ export class Main extends React.Component<Props, State> {
         this.props.dispatch(RadioActions.createRadio(this.props.formModel));
         break;
       case 'ClickEraseRadioForm':
-        this.props.dispatch(RadioActions.eraseForm(params));
+        this.props.dispatch(RadioActions.eraseForm());
         break;
       default:
         break;
     }
   }
 
-  startRadio(url: string): void {
-    console.log(url);
-    // fetch(`/api/v1/radios/start/${encodeURIComponent(url)}`)
-    //   .then(res => {
-    //     if (res.ok) {
-    //       console.log('startRadio Success');
-    //     } else {
-    //       console.log('startRadio Fail');
-    //     }
-    //   });
-  }
-
-  stopRadio(): void {
-    fetch('/api/v1/radios/stop')
-      .then(res => {
-        if (res.ok) {
-          console.log('stopRadio Success');
-        } else {
-          console.log('stopRadio Fail');
-        }
-      });
-  }
-
   render(): JSX.Element {
-    const { formModel } = this.props;
+    const { formModel, radioList } = this.props;
 
     return (
       <main className="main">
-        <Navbar />
+        <Navbar dispatch={this.dispatch} />
         <div className="container" style={{ marginTop: '48px' }}>
           <div className="row">
-            <RadioList radios={[]} dispatch={this.dispatch} />
+            <RadioList dispatch={this.dispatch} radios={radioList} />
             <RadioForm dispatch={this.dispatch} radio={formModel} />
           </div>
         </div>

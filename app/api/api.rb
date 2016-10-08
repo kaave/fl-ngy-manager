@@ -14,13 +14,6 @@ module API
         present Radio.all, with: RadioEntity
       end
 
-      route_param :id do
-        desc 'Return a radio'
-        get do
-          present Radio.find(params[:id]), with: RadioEntity
-        end
-      end
-
       desc 'Create a radio'
       # paramsにはそのメソッドで必須なパラメータを書く
       params do
@@ -34,13 +27,14 @@ module API
 
       desc 'Start radio'
       params do
-        requires :url, type: String, desc: 'Radio url'
+        requires :id, type: Integer, desc: 'id'
       end
       post :start do
-        if params[:url] =~ %r{\Ahttps?://[\w/:%#\$&\?\(\)~\.=\+\-]+\z}
-          "Command: mplayer -playlist #{params[:url]}"
+        radio = Radio.find(params[:id])
+        if radio
+          "Command: mplayer -playlist #{radio.url}"
         else
-          "Fail! url is invalid: #{params[:url]}"
+          "Fail! id is invalid: #{params[:id]}"
         end
       end
 
@@ -48,6 +42,13 @@ module API
       get :stop do
         system('sudo killall mplayer')
         $CHILD_STATUS.inspect
+      end
+
+      route_param :id do
+        desc 'Return a radio'
+        get do
+          present Radio.find(params[:id]), with: RadioEntity
+        end
       end
 
       # desc 'delete'

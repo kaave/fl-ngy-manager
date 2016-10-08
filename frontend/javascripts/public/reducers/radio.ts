@@ -32,6 +32,17 @@ export function formModel(state: RadioModel = new RadioModel(), action: Action<s
   }
 }
 
+export function nowPlayng(state: string = '', action: Action<string>): string {
+  switch (action.type) {
+  case Actions.START_RADIO_SUCCESS:
+    return action.payload || '';
+  case Actions.STOP_RADIO_SUCCESS:
+    return '';
+  default:
+    return state;
+  }
+}
+
 export default {
   radioList,
   formModel

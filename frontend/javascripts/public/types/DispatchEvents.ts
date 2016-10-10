@@ -5,5 +5,10 @@ type DispatchEvents =
   'UpdateRadioFormUrl' |
   'UpdateRadioFormMemo' |
   'ClickSubmitRadioForm' |
-  'ClickEraseRadioForm';
+  'ClickEraseRadioForm' |
+  'SetUserForm' |
+  'UpdateUserFormName' |
+  'UpdateUserFormEmail' |
+  'ClickSubmitUserForm' |
+  'ClickEraseUserForm';
 export default DispatchEvents;

@@ -12,6 +12,8 @@ import DispatchEvents from "../types/DispatchEvents";
 import Navbar from "../components/navbar/";
 import RadioList from "../components/radio/list";
 import RadioForm from "../components/radio/form";
+import UserList from "../components/user/list";
+import UserForm from "../components/user/form";
 
 export interface Props {
   /*
@@ -24,6 +26,7 @@ export interface Props {
    */
   radioFormModel: RadioModel;
   radioList: RadioModel[];
+  userFormModel: UserModel;
   userList: UserModel[];
 }
 
@@ -71,19 +74,36 @@ export class Main extends React.Component<Props, State> {
       case 'ClickEraseRadioForm':
         this.props.dispatch(RadioActions.eraseForm());
         break;
+      case 'SetUserForm':
+        this.props.dispatch(UserActions.setUserForm(params));
+        break;
+      case 'UpdateUserFormName':
+        this.props.dispatch(UserActions.updateFormName(params));
+        break;
+      case 'UpdateUserFormEmail':
+        this.props.dispatch(UserActions.updateFormEmail(params));
+        break;
+      case 'ClickSubmitUserForm':
+        // this.props.dispatch(UserActions.createUser(this.props.radioFormModel));
+        break;
+      case 'ClickEraseUserForm':
+        this.props.dispatch(UserActions.eraseForm());
+        break;
       default:
         break;
     }
   }
 
   render(): JSX.Element {
-    const { radioFormModel, radioList } = this.props;
+    const { radioFormModel, radioList, userFormModel, userList } = this.props;
 
     return (
       <main className="main">
         <Navbar dispatch={this.dispatch} googleOauthPath={paths.googleOauth} />
-        <div className="container" style={{ marginTop: '48px' }}>
+        <div className="container" style={{ marginTop: '60px' }}>
           <div className="row">
+            {userList.length > 0 && <UserList dispatch={this.dispatch} users={userList} />}
+            {userFormModel != null && <UserForm dispatch={this.dispatch} user={userFormModel} />}
             {radioList.length > 0 && <RadioList dispatch={this.dispatch} radios={radioList} />}
             <RadioForm dispatch={this.dispatch} radio={radioFormModel} />
           </div>

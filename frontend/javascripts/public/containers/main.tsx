@@ -1,25 +1,33 @@
-import * as React from 'react';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import * as fetch from 'isomorphic-fetch';
-
-import * as RadioActions from '../actions/radio';
-
-import RadioModel from '../models/radio';
-import DispatchEvents from '../types/DispatchEvents';
-
-import Navbar from '../components/navbar';
-import RadioList from '../components/radio/list';
-import RadioForm from '../components/radio/form';
+import * as React from "react";
+import { Dispatch } from "redux";
+import { connect } from "react-redux";
+import * as RadioActions from "../actions/radio";
+import RadioModel from "../models/radio";
+import DispatchEvents from "../types/DispatchEvents";
+import Navbar from "../components/navbar";
+import RadioList from "../components/radio/list";
+import RadioForm from "../components/radio/form";
 
 export interface Props {
+  /*
+   * props
+   */
   dispatch: Dispatch<{}>;
+
+  /*
+   * redux state
+   */
   formModel: RadioModel;
   radioList: RadioModel[];
 }
 
 export interface State {
 }
+
+const mountPointNode = document.getElementById('mount-point');
+const paths = {
+  googleOauth: mountPointNode ? mountPointNode.getAttribute('data-google-oauth-path') || '#' : '#'
+};
 
 export class Main extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -63,7 +71,7 @@ export class Main extends React.Component<Props, State> {
 
     return (
       <main className="main">
-        <Navbar dispatch={this.dispatch} />
+        <Navbar dispatch={this.dispatch} googleOauthPath={paths.googleOauth} />
         <div className="container" style={{ marginTop: '48px' }}>
           <div className="row">
             <RadioList dispatch={this.dispatch} radios={radioList} />

@@ -1,9 +1,9 @@
 import * as React from "react";
-import NavbarHeader from "./navbar/header";
-import UserMenu from "./navbar/user";
-import CardMenu from "./navbar/card";
-import RadioMenu from "./navbar/radio";
-import DispatchEvents from "../types/DispatchEvents";
+import NavbarHeader from "./header";
+import UserMenu from "./user";
+import CardMenu from "./card";
+import RadioMenu from "./radio";
+import DispatchEvents from "../../types/DispatchEvents";
 
 export interface Props {
   dispatch: (type: DispatchEvents, params?: string | number) => void;

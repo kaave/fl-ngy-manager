@@ -43,27 +43,25 @@ function* stopRadio(action: Action<void>): IterableIterator<any> {
   }
 }
 
-function* watchGetRadios() {
+export function* watchGetRadios() {
   yield* takeLatest(RadioAction.GET_RADIOS, getAllRadios);
 };
 
-function* watchCreateRadio() {
+export function* watchCreateRadio() {
   yield* takeEvery(RadioAction.CREATE_RADIO, createAllRadios);
 };
 
-function* watchStartRadio() {
+export function* watchStartRadio() {
   yield* takeLatest(RadioAction.START_RADIO, startRadio);
 }
 
-function* watchStopRadio() {
+export function* watchStopRadio() {
   yield* takeLatest(RadioAction.STOP_RADIO, stopRadio);
 }
 
-export default function* root() {
-  yield [
-    fork(watchGetRadios),
-    fork(watchCreateRadio),
-    fork(watchStartRadio),
-    fork(watchStopRadio)
-  ];
-}
+export default [
+  fork(watchGetRadios),
+  fork(watchCreateRadio),
+  fork(watchStartRadio),
+  fork(watchStopRadio)
+];

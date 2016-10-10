@@ -59,5 +59,16 @@ module API
       #   Article.find(params[:id]).destroy
       # end
     end
+
+    class UserEntity < Grape::Entity
+      expose :id, :name, :email
+    end
+
+    resource :users do
+      desc 'Return all users.'
+      get :all do
+        present User.all, with: UserEntity
+      end
+    end
   end
 end

@@ -37,6 +37,11 @@ gem 'seed-fu', '~> 2.3'
 gem 'grape'
 gem 'grape-entity'
 
+# add OAuth
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'

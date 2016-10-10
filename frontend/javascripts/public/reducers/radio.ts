@@ -17,7 +17,7 @@ export function radioList(state = [], { type, payload }: Action<RadioModel | Rad
   }
 }
 
-export function formModel(state: RadioModel = new RadioModel(), action: Action<string>): RadioModel {
+export function radioFormModel(state: RadioModel = new RadioModel(), action: Action<string>): RadioModel {
   switch (action.type) {
   case Actions.UPDATE_FORM_NAME:
     return new RadioModel(Object.assign({}, state, { name: action.payload }));
@@ -45,5 +45,5 @@ export function nowPlayng(state: string = '', action: Action<string>): string {
 
 export default {
   radioList,
-  formModel
+  radioFormModel
 };

@@ -1,4 +1,7 @@
 <div
 id="mount-point"
 data-google-oauth-path="<%= user_google_oauth2_omniauth_authorize_path %>"
+<% if flash %>
+data-flash="<%= flash.to_json %>"
+<% end %>
 ></div>

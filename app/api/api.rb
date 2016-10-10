@@ -70,5 +70,25 @@ module API
         present User.all, with: UserEntity
       end
     end
+
+    class DeviceEntity < Grape::Entity
+      expose :id, :name, :key, :type_code, :source
+    end
+
+    resource :devices do
+      desc 'Return all users.'
+      get :all do
+        present Device.all, with: DeviceEntity
+      end
+
+      desc 'Return all users.'
+      params do
+        requires :src, type: String, desc: 'Full src'
+      end
+      get :read do
+        "src: #{params[:src]}"
+        # present Device.all, with: DeviceEntity
+      end
+    end
   end
 end

@@ -1,16 +1,16 @@
 import * as React from 'react';
 
-import Radio from '../../models/radio';
+import RadioModel from '../../models/radio';
 import DispatchEvents from '../../types/DispatchEvents';
 
 export interface Props {
-  radios: Radio[];
-  dispatch: (type: DispatchEvents, params: string) => void;
+  radios: RadioModel[];
+  dispatch: (type: DispatchEvents, params: string | number) => void;
 }
 
 interface RadioRawProps {
-  radio: Radio;
-  dispatch: (type: DispatchEvents, params: string) => void;
+  radio: RadioModel;
+  dispatch: (type: DispatchEvents, params: string | number) => void;
 }
 
 class RadioRow extends React.Component<RadioRawProps, {}> {
@@ -19,8 +19,10 @@ class RadioRow extends React.Component<RadioRawProps, {}> {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(_e: React.MouseEvent): void {
-    this.props.dispatch('StartRadio', this.props.radio.url);
+  handleClick(_e: React.MouseEvent<HTMLLIElement>): void {
+    if (this.props.radio.id != null) {
+      this.props.dispatch('StartRadio', this.props.radio.id);
+    }
   }
 
   render(): JSX.Element {

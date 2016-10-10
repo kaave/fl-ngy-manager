@@ -14,15 +14,27 @@ module API
         present Radio.all, with: RadioEntity
       end
 
+      desc 'Create a radio'
+      # paramsにはそのメソッドで必須なパラメータを書く
+      params do
+        requires :name, type: String, desc: 'name'
+        requires :url, type: String, desc: 'url'
+        requires :memo, type: String, desc: 'memo'
+      end
+      post do
+        Radio.create(name: params[:name], url: params[:url], memo: params[:memo])
+      end
+
       desc 'Start radio'
       params do
-        requires :url, type: String, desc: 'Radio url'
+        requires :id, type: Integer, desc: 'id'
       end
       post :start do
-        if params[:url] =~ %r{\Ahttps?://[\w/:%#\$&\?\(\)~\.=\+\-]+\z} 
-          "Command: mplayer -playlist #{params[:url]}"
+        radio = Radio.find(params[:id])
+        if radio
+          "Command: mplayer -playlist #{radio.url}"
         else
-          "Fail! url is invalid: #{params[:url]}"
+          "Fail! id is invalid: #{params[:id]}"
         end
       end
 
@@ -38,16 +50,6 @@ module API
           present Radio.find(params[:id]), with: RadioEntity
         end
       end
-
-      # desc 'Create a Article'
-      # # paramsにはそのメソッドで必須なパラメータを書く
-      # params do
-      #   requires :title, type: String, desc: 'title'
-      #   requires :author_id, type: Integer, desc: 'article author id'
-      # end
-      # post do
-      #   Article.create(title: params[:title], author_id: params[:author_id])
-      # end
 
       # desc 'delete'
       # params do

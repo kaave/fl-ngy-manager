@@ -41,7 +41,9 @@ module.exports = {
       'redux',
       'redux-actions',
       'redux-logger',
-      'redux-saga'
+      'redux-saga',
+      'isomorphic-fetch',
+      'classnames'
     ],
   }),
   output: {

@@ -51,9 +51,6 @@ module.exports = {
     path: path.join(__dirname, 'public/dist')
   },
   resolve: {
-    alias: {
-      actioncable: `${__dirname}/vendor/bundle/ruby/2.3.0/gems/actioncable-5.0.0.1/lib/assets/compiled/action_cable.js`
-    },
     extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.jsx', '.js']
   },
   loaders: [

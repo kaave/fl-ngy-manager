@@ -1,19 +1,21 @@
-import * as React from "react";
-import { Dispatch } from "redux";
-import { connect } from "react-redux";
+import * as React from 'react';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 
-import * as RadioActions from "../actions/radio";
-import RadioModel from "../models/radio";
+import * as RadioActions from '../actions/radio';
+import RadioModel from '../models/radio';
 
-import * as UserActions from "../actions/user";
-import UserModel from "../models/user";
+import * as UserActions from '../actions/user';
+import UserModel from '../models/user';
 
-import DispatchEvents from "../types/DispatchEvents";
-import Navbar from "../components/navbar/";
-import RadioList from "../components/radio/list";
-import RadioForm from "../components/radio/form";
-import UserList from "../components/user/list";
-import UserForm from "../components/user/form";
+import DispatchEvents from '../types/DispatchEvents';
+import Navbar from '../components/navbar/';
+import RadioList from '../components/radio/list';
+import RadioForm from '../components/radio/form';
+import UserList from '../components/user/list';
+import UserForm from '../components/user/form';
+
+import channel from '../channels/reader';
 
 export interface Props {
   /*
@@ -42,6 +44,8 @@ const paths = {
 };
 
 export class Main extends React.Component<Props, State> {
+  channel: ActionCable.Channel;
+
   constructor(props: Props) {
     super(props);
 
@@ -49,6 +53,9 @@ export class Main extends React.Component<Props, State> {
 
     this.props.dispatch(RadioActions.getRadios());
     this.props.dispatch(UserActions.getUsers());
+
+    this.channel = channel((e: string) => console.log(e));
+    // channel.perform('message', 'asdfgh');
   }
 
   dispatch(type: DispatchEvents, params?: any): void {

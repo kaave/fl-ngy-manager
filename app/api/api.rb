@@ -86,8 +86,12 @@ module API
         requires :src, type: String, desc: 'Full src'
       end
       get :read do
-        "src: #{params[:src]}"
-        # present Device.all, with: DeviceEntity
+        begin
+          ActionCable.server.broadcast('reader_read', mode: 'CardLoad', src: params[:src], datetime: Time.now)
+          "Success! src:[#{params[:src]}] datetime: [#{Time.now}]"
+        rescue => exception
+          "Error! src:[#{params[:src]}] datetime: [#{Time.now}] error: [#{exception}]"
+        end
       end
     end
   end

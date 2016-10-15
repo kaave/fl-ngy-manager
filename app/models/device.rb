@@ -1,4 +1,5 @@
 class Device < ApplicationRecord
+  belongs_to :user
   def self.parse(src)
     # あべ Manaca
     # Type3Tag 'FeliCa Standard (RC-S???)' ID=01010410770FFC02 PMM=100B4B428485D0FF SYS=0003

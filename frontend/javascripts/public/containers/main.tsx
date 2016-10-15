@@ -8,12 +8,18 @@ import RadioModel from '../models/radio';
 import * as UserActions from '../actions/user';
 import UserModel from '../models/user';
 
+import * as DeviceActions from '../actions/device';
+import DeviceModel from '../models/device';
+import DeviceSrcModel from '../models/deviceSrc';
+
 import DispatchEvents from '../types/DispatchEvents';
+
 import Navbar from '../components/navbar/';
 import RadioList from '../components/radio/list';
 import RadioForm from '../components/radio/form';
 import UserList from '../components/user/list';
 import UserForm from '../components/user/form';
+import DeviceForm from '../components/device/form';
 
 import channel from '../channels/reader';
 
@@ -30,6 +36,7 @@ export interface Props {
   radioList: RadioModel[];
   userFormModel: UserModel;
   userList: UserModel[];
+  deviceFormModel: DeviceModel;
 }
 
 export interface State {
@@ -50,12 +57,26 @@ export class Main extends React.Component<Props, State> {
     super(props);
 
     this.dispatch = this.dispatch.bind(this);
+    this.handleDeviceRead = this.handleDeviceRead.bind(this);
 
     this.props.dispatch(RadioActions.getRadios());
     this.props.dispatch(UserActions.getUsers());
 
-    this.channel = channel((e: string) => console.log(e));
-    // channel.perform('message', 'asdfgh');
+    this.channel = channel(this.handleDeviceRead);
+  }
+
+  handleDeviceRead({ src, datetime, mode }: DeviceSrcModel): void {
+    switch (mode) {
+      case 'DeviceRead':
+        const parseModel = DeviceModel.parse(src);
+        const newModel = new DeviceModel(Object.assign({}, parseModel.toJSON(), {
+          name: this.props.deviceFormModel.toJSON().name
+        }));
+        this.props.dispatch(DeviceActions.deviceRead(newModel));
+        break;
+      default:
+        break;
+    }
   }
 
   dispatch(type: DispatchEvents, params?: any): void {
@@ -96,13 +117,31 @@ export class Main extends React.Component<Props, State> {
       case 'ClickEraseUserForm':
         this.props.dispatch(UserActions.eraseForm());
         break;
+      case 'UpdateDeviceFormName':
+        this.props.dispatch(DeviceActions.updateFormName(params));
+        break;
+      case 'UpdateDeviceFormKey':
+        this.props.dispatch(DeviceActions.updateFormKey(params));
+        break;
+      case 'UpdateDeviceFormTypeCode':
+        this.props.dispatch(DeviceActions.updateFormTypeCode(params));
+        break;
+      case 'UpdateDeviceFormSource':
+        this.props.dispatch(DeviceActions.updateFormSource(params));
+        break;
+      case 'ClickSubmitDeviceForm':
+        this.props.dispatch(DeviceActions.createDevice(this.props.deviceFormModel));
+        break;
+      case 'ClickEraseDeviceForm':
+        this.props.dispatch(DeviceActions.eraseForm());
+        break;
       default:
         break;
     }
   }
 
   render(): JSX.Element {
-    const { radioFormModel, radioList, userFormModel, userList } = this.props;
+    const { radioFormModel, radioList, userFormModel, userList, deviceFormModel } = this.props;
 
     return (
       <main className="main">
@@ -113,6 +152,7 @@ export class Main extends React.Component<Props, State> {
             {userFormModel != null && <UserForm dispatch={this.dispatch} user={userFormModel} />}
             {radioList.length > 0 && <RadioList dispatch={this.dispatch} radios={radioList} />}
             <RadioForm dispatch={this.dispatch} radio={radioFormModel} />
+            <DeviceForm dispatch={this.dispatch} device={deviceFormModel} />
           </div>
         </div>
       </main>

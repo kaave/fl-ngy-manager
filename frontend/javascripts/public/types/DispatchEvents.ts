@@ -10,5 +10,11 @@ type DispatchEvents =
   'UpdateUserFormName' |
   'UpdateUserFormEmail' |
   'ClickSubmitUserForm' |
-  'ClickEraseUserForm';
+  'ClickEraseUserForm' |
+  'UpdateDeviceFormName' |
+  'UpdateDeviceFormKey' |
+  'UpdateDeviceFormTypeCode' |
+  'UpdateDeviceFormSource' |
+  'ClickSubmitDeviceForm' |
+  'ClickEraseDeviceForm';
 export default DispatchEvents;

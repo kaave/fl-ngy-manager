@@ -62,6 +62,7 @@ module API
 
     class UserEntity < Grape::Entity
       expose :id, :name, :email
+      expose :devices
     end
 
     resource :users do

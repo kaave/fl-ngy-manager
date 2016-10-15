@@ -20,11 +20,11 @@ export function radioList(state = [], { type, payload }: Action<RadioModel | Rad
 export function radioFormModel(state: RadioModel = new RadioModel(), action: Action<string>): RadioModel {
   switch (action.type) {
   case Actions.UPDATE_FORM_NAME:
-    return new RadioModel(Object.assign({}, state, { name: action.payload }));
+    return new RadioModel(Object.assign({}, state.toJSON(), { name: action.payload }));
   case Actions.UPDATE_FORM_URL:
-    return new RadioModel(Object.assign({}, state, { url: action.payload }));
+    return new RadioModel(Object.assign({}, state.toJSON(), { url: action.payload }));
   case Actions.UPDATE_FORM_MEMO:
-    return new RadioModel(Object.assign({}, state, { memo: action.payload }));
+    return new RadioModel(Object.assign({}, state.toJSON(), { memo: action.payload }));
   case Actions.ERASE_FORM:
     return new RadioModel();
   default:

@@ -71,6 +71,7 @@
     "@types/redux-actions": "^0.8.30",
     "@types/redux-logger": "^2.6.32",
     "@types/redux-saga": "^0.9.30",
+    "actioncable": "^5.0.0",
     "babel-polyfill": "^6.13.0",
     "bootstrap-sass": "^3.3.7",
     "classnames": "^2.2.5",

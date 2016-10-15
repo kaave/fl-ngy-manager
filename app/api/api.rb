@@ -81,13 +81,28 @@ module API
         present Device.all, with: DeviceEntity
       end
 
+      desc 'Create a device'
+      params do
+        requires :name, type: String, desc: 'name'
+        requires :type_code, type: Integer, desc: 'type_code'
+        requires :key, type: String, desc: 'key'
+        requires :source, type: String, desc: 'source'
+      end
+      post do
+        Device.create(name: params[:name], type_code: params[:type_code], key: params[:key], source: params[:source])
+      end
+
       desc 'Return all users.'
       params do
         requires :src, type: String, desc: 'Full src'
       end
       get :read do
-        "src: #{params[:src]}"
-        # present Device.all, with: DeviceEntity
+        begin
+          ActionCable.server.broadcast('reader_read', mode: 'DeviceRead', src: params[:src], datetime: Time.now)
+          "Success! src:[#{params[:src]}] datetime: [#{Time.now}]"
+        rescue => exception
+          "Error! src:[#{params[:src]}] datetime: [#{Time.now}] error: [#{exception}]"
+        end
       end
     end
   end

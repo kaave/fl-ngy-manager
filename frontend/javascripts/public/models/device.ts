@@ -1,3 +1,5 @@
+import ActionCableEvents from '../types/ActionCableEvents';
+
 export interface IDevice {
   id?: number;
   name: string;
@@ -14,6 +16,12 @@ export interface IDeviceApi {
   source: string;
   user_id: number;
 }
+
+export interface IDeviceSrc {
+  src: string;
+  mode: ActionCableEvents;
+  datetime: string;
+};
 
 export default class DeviceModel {
   id?: number;
@@ -64,7 +72,7 @@ export default class DeviceModel {
     const matcher = source.match(/^Type(\d+)Tag .+ ID=([0-9A-F]+)/);
 
     if (!matcher) {
-      throw new TypeError(`Error! source[${source}] is not matched to DeviceSrc`)
+      throw new TypeError(`Error! source[${source}] is not matched to DeviceSrc`);
     }
 
     return new DeviceModel({

@@ -3,7 +3,7 @@ import { Action } from 'redux-actions';
 import * as Actions from '../actions/user';
 import { default as UserModel, IUserSrc } from '../models/user';
 
-export function userList(state = [], { type, payload }: Action<UserModel | UserModel[] | IUserSrc>): UserModel[] {
+export function userList(state: UserModel[] = [], { type, payload }: Action<UserModel | UserModel[] | IUserSrc>): UserModel[] {
   switch (type) {
   case Actions.GET_USERS_SUCCESS:
     return payload as UserModel[];

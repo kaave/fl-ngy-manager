@@ -9,8 +9,7 @@ import * as UserActions from '../actions/user';
 import UserModel from '../models/user';
 
 import * as DeviceActions from '../actions/device';
-import DeviceModel from '../models/device';
-import DeviceSrcModel from '../models/deviceSrc';
+import { default as DeviceModel, IDeviceSrc } from '../models/device';
 
 import DispatchEvents from '../types/DispatchEvents';
 
@@ -64,7 +63,7 @@ export class Main extends React.Component<Props, {}> {
     this.channel = channel(this.handleDeviceRead);
   }
 
-  handleDeviceRead({ src, datetime, mode }: DeviceSrcModel): void {
+  handleDeviceRead({ src, datetime, mode }: IDeviceSrc): void {
     switch (mode) {
       case 'DeviceRead':
         const parseModel = DeviceModel.parse(src);

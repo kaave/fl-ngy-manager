@@ -1,5 +1,5 @@
-import { takeEvery, takeLatest } from 'redux-saga'
-import { call, put, fork } from 'redux-saga/effects'
+import { takeEvery, takeLatest } from 'redux-saga';
+import { call, put, fork } from 'redux-saga/effects';
 import { Action } from 'redux-actions';
 
 import { IRadio, default as RadioModel } from '../models/radio';
@@ -15,7 +15,7 @@ function* getAllRadios(action: Action<void>): IterableIterator<any> {
   }
 }
 
-function* createAllRadios(action: Action<RadioModel>): IterableIterator<any> {
+function* createRadios(action: Action<RadioModel>): IterableIterator<any> {
   try {
     const model: RadioModel = action.payload as RadioModel;
     const radios: IRadio = yield call(Api.create, model.toFormData());
@@ -48,7 +48,7 @@ export function* watchGetRadios() {
 };
 
 export function* watchCreateRadio() {
-  yield* takeEvery(RadioAction.CREATE_RADIO, createAllRadios);
+  yield* takeEvery(RadioAction.CREATE_RADIO, createRadios);
 };
 
 export function* watchStartRadio() {

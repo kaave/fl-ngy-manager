@@ -21,7 +21,7 @@ class UserRow extends React.Component<UserRawProps, {}> {
 
   handleClick(_e: React.MouseEvent<HTMLLIElement>): void {
     if (this.props.user != null) {
-      this.props.dispatch('SetUserForm', this.props.user);
+      this.props.dispatch('SetUserForm', new UserModel(this.props.user.toJSON()));
     }
   }
 

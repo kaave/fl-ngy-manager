@@ -6,6 +6,15 @@ export interface IDevice {
   source?: string;
 };
 
+export interface IDeviceApi {
+  id: number;
+  name: string;
+  key: string;
+  type_code: number;
+  source: string;
+  user_id: number;
+}
+
 export default class DeviceModel {
   id?: number;
   name: string;
@@ -50,7 +59,7 @@ export default class DeviceModel {
   IsValidKey() : boolean {
     return this.key.length > 0;
   }
-  
+
   static parse(source: string): DeviceModel {
     const matcher = source.match(/^Type(\d+)Tag .+ ID=([0-9A-F]+)/);
 
@@ -63,6 +72,16 @@ export default class DeviceModel {
       name: '',
       key: matcher[2],
       typeCode: parseInt(matcher[1], 10)
+    });
+  }
+
+  static parseApiResult(data: IDeviceApi): DeviceModel {
+    return new DeviceModel({
+      id: data.id,
+      source: data.source,
+      name: data.name,
+      key: data.key,
+      typeCode: data.type_code
     });
   }
 

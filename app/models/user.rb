@@ -8,6 +8,21 @@ class User < ApplicationRecord
 
   protected
 
+  def self.update(data)
+    user = User.find(data.id)
+
+    begin
+      user.name = data.name
+      user.email = data.email
+
+      user.save
+    rescue => exception
+      puts exception
+    end
+
+    user
+  end
+
   def self.find_for_google(auth)
     user = User.find_by(email: auth.info.email)
 

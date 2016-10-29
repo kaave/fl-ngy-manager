@@ -67,17 +67,48 @@ module API
 
     resource :users do
       desc 'Return all users.'
-      get :all do
+      get do
         present User.all, with: UserEntity
+      end
+
+      route_param :id do
+        desc 'Update user'
+        params do
+          requires :id, type: Integer, desc: 'id'
+          requires :name, type: String, desc: 'name'
+          requires :email, type: String, desc: 'email'
+          optional :devices, type: Array[Integer], desc: 'devices'
+        end
+        put do
+          user = User.find(params[:id])
+          pre_devices = user.devices.map(&:id)
+          user.update({
+            name: params[:name],
+            email: params[:email],
+            # devices: params[:devices] ||= []
+          })
+
+          # TODO: 微妙な書き方
+          # クエリ組み立てるのはすぐ思いついたけどこれまた微妙だしな〜
+          [].concat(pre_devices).concat(params[:devices] || []).each do |device_id|
+            if !params[:devices] || !params[:devices].include?(device_id)
+              Device.find(device_id).update({user_id: nil})
+            elsif params[:devices] && params[:devices].include?(device_id)
+              Device.find(device_id).update({user_id: params[:id]})
+            end
+          end
+
+          present User.find(params[:id]), with: UserEntity
+        end
       end
     end
 
     class DeviceEntity < Grape::Entity
-      expose :id, :name, :key, :type_code, :source
+      expose :id, :name, :key, :type_code, :source, :user_id
     end
 
     resource :devices do
-      desc 'Return all users.'
+      desc 'Return all devices.'
       get :all do
         present Device.all, with: DeviceEntity
       end

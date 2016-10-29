@@ -1,10 +1,15 @@
-import IUserSrc from './userSrc';
-
 export interface IUser {
   id: number;
   name: string;
   email: string;
   devices: number[];
+}
+
+export interface IUserSrc {
+  id: number;
+  name: string;
+  email: string;
+  devices: { id: number }[];
 }
 
 export default class User implements IUser {
@@ -29,7 +34,7 @@ export default class User implements IUser {
       this.devices = [];
     }
   }
-  
+
   static parse(userSrc: IUserSrc): User {
     const values = Object.assign({}, userSrc, {
       devices: userSrc.devices.map(device => device.id)
@@ -54,7 +59,7 @@ export default class User implements IUser {
   }
 
   IsValidEMail(): boolean {
-    return this.email.match(/@framelunch.jp$/) != null
+    return this.email.match(/@framelunch.jp$/) != null;
   }
 
   toFormData(): FormData {
@@ -62,6 +67,11 @@ export default class User implements IUser {
 
     formData.append('name', this.name);
     formData.append('email', this.email);
+    this.devices.forEach(deviceId => formData.append('devices[]', deviceId))
+
+    if (this.IsValidId()) {
+      formData.append('id', this.id);
+    }
 
     return formData;
   }

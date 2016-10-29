@@ -14,11 +14,6 @@ import { default as DeviceModel, IDeviceSrc } from '../models/device';
 import DispatchEvents from '../types/DispatchEvents';
 
 import Navbar from '../components/navbar/';
-import RadioList from '../components/radio/list';
-import RadioForm from '../components/radio/form';
-import UserList from '../components/user/list';
-import UserForm from '../components/user/form';
-import DeviceForm from '../components/device/form';
 
 import channel from '../channels/reader';
 
@@ -27,6 +22,7 @@ export interface Props {
    * props
    */
   dispatch: Dispatch<{}>;
+  children: JSX.Element;
 
   /*
    * redux state
@@ -143,23 +139,33 @@ export class Main extends React.Component<Props, {}> {
 
   render(): JSX.Element {
     const { radioFormModel, radioList, userFormModel, userList, deviceFormModel, deviceList } = this.props;
+    const props = {
+      dispatch: this.dispatch,
+      user: userFormModel,
+      users: userList,
+      device: deviceFormModel,
+      devices: deviceList,
+      radio: radioFormModel,
+      radios: radioList
+    };
 
     return (
       <main className="main">
         <Navbar dispatch={this.dispatch} googleOauthPath={paths.googleOauth} />
         <div className="container" style={{ marginTop: '60px' }}>
           <div className="row">
-            {userList.length > 0 && <UserList dispatch={this.dispatch} users={userList} />}
-            {userFormModel != null && <UserForm dispatch={this.dispatch} user={userFormModel} devices={deviceList} />}
-            {radioList.length > 0 && <RadioList dispatch={this.dispatch} radios={radioList} />}
-            <RadioForm dispatch={this.dispatch} radio={radioFormModel} />
-            <DeviceForm dispatch={this.dispatch} device={deviceFormModel} />
+            {this.props.children && React.cloneElement(this.props.children, props)}
           </div>
         </div>
       </main>
     );
   }
 }
+            // {userList.length > 0 && <UserList dispatch={this.dispatch} users={userList} />}
+            // {userFormModel != null && <UserForm dispatch={this.dispatch} user={userFormModel} devices={deviceList} />}
+            // {radioList.length > 0 && <RadioList dispatch={this.dispatch} radios={radioList} />}
+            // <RadioForm dispatch={this.dispatch} radio={radioFormModel} />
+            // <DeviceForm dispatch={this.dispatch} device={deviceFormModel} />
 
 const mapStateToProps = (state: Object) => state;
 

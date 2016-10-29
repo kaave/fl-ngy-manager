@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router';
 
 import DispatchEvents from '../../types/DispatchEvents';
 
@@ -23,8 +24,8 @@ export default class extends React.Component<Props, {}> {
           ネットラジオ <span className="caret" />
         </a>
         <ul className="dropdown-menu">
-          <li><a href="#">一覧</a></li>
-          <li><a href="#">追加</a></li>
+          <li><Link to="/radio">一覧</Link></li>
+          <li><Link to="/radio/add">追加</Link></li>
           <li><a href="#" onClick={this.handleClickStop}>停止</a></li>
         </ul>
       </li>

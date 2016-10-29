@@ -2,11 +2,13 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 
 import UserModel from '../../models/user';
+import DeviceModel from '../../models/device';
 import DispatchEvents from '../../types/DispatchEvents';
 
 export interface Props {
   dispatch: (type: DispatchEvents, params?: any) => void;
   user: UserModel;
+  devices: DeviceModel[];
 }
 
 export default class extends React.Component<Props, {}> {
@@ -15,6 +17,7 @@ export default class extends React.Component<Props, {}> {
 
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangeEMail = this.handleChangeEMail.bind(this);
+    this.handleChangeDevices = this.handleChangeDevices.bind(this);
     this.handleClickSubmit = this.handleClickSubmit.bind(this);
     this.handleClickErase = this.handleClickErase.bind(this);
   }
@@ -29,6 +32,11 @@ export default class extends React.Component<Props, {}> {
     this.props.dispatch('UpdateUserFormEmail', target.value);
   }
 
+  handleChangeDevices(e: React.FormEvent<HTMLInputElement>): void {
+    const target = e.target as HTMLInputElement;
+    this.props.dispatch('UpdateUserFormDevices', parseInt(target.value, 10));
+  }
+
   handleClickSubmit(e: React.MouseEvent<HTMLButtonElement>): void {
     this.props.dispatch('ClickSubmitUserForm');
   }
@@ -38,7 +46,7 @@ export default class extends React.Component<Props, {}> {
   }
 
   render(): JSX.Element {
-    const { user } = this.props;
+    const { user, devices } = this.props;
 
     return (
       <div className="col-md-12">
@@ -51,6 +59,20 @@ export default class extends React.Component<Props, {}> {
           <label>メアド</label>
           <input type="text" className="form-control" placeholder="○○○@framelunch.jp" value={user.email} onChange={this.handleChangeEMail} />
           <small className="form-text text-muted">メールアドレスを入力してください。</small>
+        </div>
+
+        <div className="form-group">
+          <label>FeliCaデバイス</label>
+          {devices.map((device, i) => (
+            <label key={i} className="checkbox-inline">
+              <input
+                type="checkbox"
+                value={device.id}
+                onChange={this.handleChangeDevices}
+                checked={typeof device.id === 'number' && user.devices.indexOf(device.id) !== -1}
+              /> {device.name} {`(${device.key})`}
+            </label>
+          ))}
         </div>
 
         <button className="btn btn-primary" onClick={this.handleClickSubmit} disabled={!user.IsValid()}>

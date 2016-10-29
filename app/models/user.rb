@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :devices
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -6,6 +7,21 @@ class User < ApplicationRecord
          :omniauthable
 
   protected
+
+  def self.update(data)
+    user = User.find(data.id)
+
+    begin
+      user.name = data.name
+      user.email = data.email
+
+      user.save
+    rescue => exception
+      puts exception
+    end
+
+    user
+  end
 
   def self.find_for_google(auth)
     user = User.find_by(email: auth.info.email)

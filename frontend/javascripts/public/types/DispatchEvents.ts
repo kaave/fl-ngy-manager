@@ -9,6 +9,7 @@ type DispatchEvents =
   'SetUserForm' |
   'UpdateUserFormName' |
   'UpdateUserFormEmail' |
+  'UpdateUserFormDevices' |
   'ClickSubmitUserForm' |
   'ClickEraseUserForm' |
   'UpdateDeviceFormName' |

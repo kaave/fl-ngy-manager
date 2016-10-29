@@ -2,12 +2,21 @@ export interface IUser {
   id: number;
   name: string;
   email: string;
+  devices: number[];
+}
+
+export interface IUserSrc {
+  id: number;
+  name: string;
+  email: string;
+  devices: { id: number }[];
 }
 
 export default class User implements IUser {
   id: number;
   name: string;
   email: string;
+  devices: number[];
 
   constructor(prev?: IUser) {
     this.init(prev);
@@ -18,10 +27,19 @@ export default class User implements IUser {
       this.id = prev.id;
       this.name = prev.name;
       this.email = prev.email;
+      this.devices = prev.devices;
     } else {
       this.name = '';
       this.email = '';
+      this.devices = [];
     }
+  }
+
+  static parse(userSrc: IUserSrc): User {
+    const values = Object.assign({}, userSrc, {
+      devices: userSrc.devices.map(device => device.id)
+    });
+    return new User(values);
   }
 
   IsValid(): boolean {
@@ -41,7 +59,7 @@ export default class User implements IUser {
   }
 
   IsValidEMail(): boolean {
-    return this.email.match(/@framelunch.jp$/) != null
+    return this.email.match(/@framelunch.jp$/) != null;
   }
 
   toFormData(): FormData {
@@ -49,6 +67,11 @@ export default class User implements IUser {
 
     formData.append('name', this.name);
     formData.append('email', this.email);
+    this.devices.forEach(deviceId => formData.append('devices[]', deviceId))
+
+    if (this.IsValidId()) {
+      formData.append('id', this.id);
+    }
 
     return formData;
   }
@@ -57,7 +80,8 @@ export default class User implements IUser {
     const result: IUser = {
       id: this.id,
       name: this.name,
-      email: this.email
+      email: this.email,
+      devices: this.devices
     };
 
     return result;

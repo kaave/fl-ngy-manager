@@ -8,6 +8,10 @@ export const GET_USERS_ERROR = `${actionPrefix}GET_USERS_ERROR`;
 export const SET_USER_FORM = `${actionPrefix}SET_USER_FORM`;
 export const UPDATE_FORM_NAME = `${actionPrefix}UPDATE_FORM_NAME`;
 export const UPDATE_FORM_EMAIL = `${actionPrefix}UPDATE_FORM_EMAIL`;
+export const UPDATE_FORM_DEVICES = `${actionPrefix}UPDATE_FORM_DEVICES`;
+export const UPDATE_USER = `${actionPrefix}UPDATE_USER`;
+export const UPDATE_USER_SUCCESS = `${actionPrefix}UPDATE_USER_SUCCESS`;
+export const UPDATE_USER_ERROR = `${actionPrefix}UPDATE_USER_ERROR`;
 export const ERASE_FORM = `${actionPrefix}ERASE_FORM`;
 
 export const getUsers = createAction<null>(
@@ -37,6 +41,26 @@ export const updateFormName = createAction<string>(
 
 export const updateFormEmail = createAction<string>(
   UPDATE_FORM_EMAIL,
+  (text: string) => text
+);
+
+export const updateFormDevices = createAction<number>(
+  UPDATE_FORM_DEVICES,
+  (id: number) => id
+);
+
+export const updateUser = createAction<UserModel>(
+  UPDATE_USER,
+  (model: UserModel) => model
+);
+
+export const updateUserSuccess = createAction<UserModel>(
+  UPDATE_USER_SUCCESS,
+  (model: UserModel) => model
+);
+
+export const updateUserError = createAction<string>(
+  UPDATE_USER_ERROR,
   (text: string) => text
 );
 

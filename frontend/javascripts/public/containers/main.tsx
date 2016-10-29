@@ -37,9 +37,7 @@ export interface Props {
   userFormModel: UserModel;
   userList: UserModel[];
   deviceFormModel: DeviceModel;
-}
-
-export interface State {
+  deviceList: DeviceModel[];
 }
 
 /*
@@ -50,7 +48,7 @@ const paths = {
   googleOauth: mountPointNode ? mountPointNode.getAttribute('data-google-oauth-path') || '#' : '#'
 };
 
-export class Main extends React.Component<Props, State> {
+export class Main extends React.Component<Props, {}> {
   channel: ActionCable.Channel;
 
   constructor(props: Props) {
@@ -61,6 +59,7 @@ export class Main extends React.Component<Props, State> {
 
     this.props.dispatch(RadioActions.getRadios());
     this.props.dispatch(UserActions.getUsers());
+    this.props.dispatch(DeviceActions.getDevices());
 
     this.channel = channel(this.handleDeviceRead);
   }
@@ -111,8 +110,11 @@ export class Main extends React.Component<Props, State> {
       case 'UpdateUserFormEmail':
         this.props.dispatch(UserActions.updateFormEmail(params));
         break;
+      case 'UpdateUserFormDevices':
+        this.props.dispatch(UserActions.updateFormDevices(params));
+        break;
       case 'ClickSubmitUserForm':
-        // this.props.dispatch(UserActions.createUser(this.props.radioFormModel));
+        this.props.dispatch(UserActions.updateUser(this.props.userFormModel));
         break;
       case 'ClickEraseUserForm':
         this.props.dispatch(UserActions.eraseForm());
@@ -141,7 +143,7 @@ export class Main extends React.Component<Props, State> {
   }
 
   render(): JSX.Element {
-    const { radioFormModel, radioList, userFormModel, userList, deviceFormModel } = this.props;
+    const { radioFormModel, radioList, userFormModel, userList, deviceFormModel, deviceList } = this.props;
 
     return (
       <main className="main">
@@ -149,7 +151,7 @@ export class Main extends React.Component<Props, State> {
         <div className="container" style={{ marginTop: '60px' }}>
           <div className="row">
             {userList.length > 0 && <UserList dispatch={this.dispatch} users={userList} />}
-            {userFormModel != null && <UserForm dispatch={this.dispatch} user={userFormModel} />}
+            {userFormModel != null && <UserForm dispatch={this.dispatch} user={userFormModel} devices={deviceList} />}
             {radioList.length > 0 && <RadioList dispatch={this.dispatch} radios={radioList} />}
             <RadioForm dispatch={this.dispatch} radio={radioFormModel} />
             <DeviceForm dispatch={this.dispatch} device={deviceFormModel} />
@@ -160,6 +162,6 @@ export class Main extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: Object) => (state);
+const mapStateToProps = (state: Object) => state;
 
 export default connect(mapStateToProps)(Main);

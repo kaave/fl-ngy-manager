@@ -8,8 +8,8 @@ export default function(): JSX.Element {
         カード <span className="caret" />
       </a>
       <ul className="dropdown-menu">
-        <li><Link to="/card">一覧</Link></li>
-        <li><Link to="/card/add">追加</Link></li>
+        <li><Link to="/device">一覧</Link></li>
+        <li><Link to="/device/add">追加</Link></li>
       </ul>
     </li>
   );

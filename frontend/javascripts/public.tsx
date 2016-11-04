@@ -36,7 +36,7 @@ window.addEventListener('DOMContentLoaded', () => {
             <Route path="/" component={Main}>
               <IndexRoute component={RadioList} />
               <Route path="user" component={UserList}/>
-              <Route path="radio/add" component={UserForm}/>
+              <Route path="user/add" component={UserForm}/>
               <Route path="radio" component={RadioList}/>
               <Route path="radio/add" component={RadioForm}/>
               <Route path="device/add" component={DeviceForm}/>

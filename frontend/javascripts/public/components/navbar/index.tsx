@@ -1,7 +1,7 @@
 import * as React from 'react';
 import NavbarHeader from './header';
 import UserMenu from './user';
-import CardMenu from './card';
+import DeviceMenu from './device';
 import RadioMenu from './radio';
 import DispatchEvents from '../../types/DispatchEvents';
 
@@ -19,7 +19,7 @@ export default function ({ dispatch, googleOauthPath }: Props): JSX.Element {
         <div id="navbar" className="navbar-collapse collapse">
           <ul className="nav navbar-nav">
             <UserMenu googleOauthPath={googleOauthPath} />
-            <CardMenu />
+            <DeviceMenu />
             <RadioMenu dispatch={dispatch} />
           </ul>
         </div>

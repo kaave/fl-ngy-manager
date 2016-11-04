@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router';
 
 export default function(): JSX.Element {
   return (
@@ -7,8 +8,8 @@ export default function(): JSX.Element {
         カード <span className="caret" />
       </a>
       <ul className="dropdown-menu">
-        <li><a href="#">一覧</a></li>
-        <li><a href="#">追加</a></li>
+        <li><Link to="/device">一覧</Link></li>
+        <li><Link to="/device/add">追加</Link></li>
       </ul>
     </li>
   );

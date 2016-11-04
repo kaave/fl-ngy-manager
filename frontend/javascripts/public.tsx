@@ -10,6 +10,7 @@ import UserList from './public/components/user/list';
 import UserForm from './public/components/user/form';
 import RadioList from './public/components/radio/list';
 import RadioForm from './public/components/radio/form';
+import DeviceList from './public/components/device/list';
 import DeviceForm from './public/components/device/form';
 import reducers from './public/reducers/';
 import sagas from './public/sagas/';
@@ -39,6 +40,7 @@ window.addEventListener('DOMContentLoaded', () => {
               <Route path="user/add" component={UserForm}/>
               <Route path="radio" component={RadioList}/>
               <Route path="radio/add" component={RadioForm}/>
+              <Route path="device" component={DeviceList}/>
               <Route path="device/add" component={DeviceForm}/>
               <Route path="*" component={RadioList}/>
             </Route>

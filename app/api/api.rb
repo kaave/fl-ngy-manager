@@ -10,7 +10,7 @@ module API
 
     resource :radios do
       desc 'Return all radios.'
-      get :all do
+      get do
         present Radio.all, with: RadioEntity
       end
 
@@ -109,7 +109,7 @@ module API
 
     resource :devices do
       desc 'Return all devices.'
-      get :all do
+      get do
         present Device.all, with: DeviceEntity
       end
 

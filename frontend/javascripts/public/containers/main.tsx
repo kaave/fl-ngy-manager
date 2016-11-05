@@ -11,6 +11,9 @@ import UserModel from '../models/user';
 import * as DeviceActions from '../actions/device';
 import { default as DeviceModel, IDeviceSrc } from '../models/device';
 
+import * as EventActions from '../actions/event';
+import { default as EventModel, IEventApi } from '../models/event';
+
 import DispatchEvents from '../types/DispatchEvents';
 
 import Navbar from '../components/navbar/';
@@ -33,6 +36,7 @@ export interface Props {
   userList: UserModel[];
   deviceFormModel: DeviceModel;
   deviceList: DeviceModel[];
+  eventList: EventModel[];
 }
 
 /*
@@ -55,6 +59,7 @@ export class Main extends React.Component<Props, {}> {
     this.props.dispatch(RadioActions.getRadios());
     this.props.dispatch(UserActions.getUsers());
     this.props.dispatch(DeviceActions.getDevices());
+    this.props.dispatch(EventActions.getEvents());
 
     this.channel = channel(this.handleDeviceRead);
   }
@@ -138,7 +143,7 @@ export class Main extends React.Component<Props, {}> {
   }
 
   render(): JSX.Element {
-    const { radioFormModel, radioList, userFormModel, userList, deviceFormModel, deviceList } = this.props;
+    const { radioFormModel, radioList, userFormModel, userList, deviceFormModel, deviceList, eventList } = this.props;
     const props = {
       dispatch: this.dispatch,
       user: userFormModel,
@@ -146,7 +151,8 @@ export class Main extends React.Component<Props, {}> {
       device: deviceFormModel,
       devices: deviceList,
       radio: radioFormModel,
-      radios: radioList
+      radios: radioList,
+      events: eventList
     };
 
     return (
@@ -161,11 +167,6 @@ export class Main extends React.Component<Props, {}> {
     );
   }
 }
-            // {userList.length > 0 && <UserList dispatch={this.dispatch} users={userList} />}
-            // {userFormModel != null && <UserForm dispatch={this.dispatch} user={userFormModel} devices={deviceList} />}
-            // {radioList.length > 0 && <RadioList dispatch={this.dispatch} radios={radioList} />}
-            // <RadioForm dispatch={this.dispatch} radio={radioFormModel} />
-            // <DeviceForm dispatch={this.dispatch} device={deviceFormModel} />
 
 const mapStateToProps = (state: Object) => state;
 

@@ -137,5 +137,47 @@ module API
         end
       end
     end
+
+    class EventEntity < Grape::Entity
+      expose :id, :event_at, :user_id
+    end
+
+    resource :events do
+      desc 'Return all event.'
+      get do
+        present Event.all, with: EventEntity
+      end
+
+      desc 'Update event'
+      params do
+        requires :event_at, type: DateTime, desc: 'event_at'
+        requires :user_id, type: Integer, desc: 'user_id'
+      end
+      post do
+        Event.create(event_at: params[:event_at], user_id: params[:user_id])
+      end
+
+      route_param :id do
+        desc 'Update event'
+        params do
+          requires :id, type: Integer, desc: 'id'
+          requires :event_at, type: String, desc: 'event_at'
+        end
+        put do
+          event = Event.find(params[:id])
+          event.update({event_at: params[:event_at]})
+
+          present Event.find(params[:id]), with: EventEntity
+        end
+
+        desc 'delete'
+        params do
+          requires :id, type: Integer, desc: 'UserID'
+        end
+        delete do
+          Event.find(params[:id]).destroy
+        end
+      end
+    end
   end
 end

@@ -17,7 +17,7 @@ export default function ({ googleOauthPath }: Props): JSX.Element {
       <ul className="dropdown-menu">
         <li><Link to="/user">一覧</Link></li>
         <li><a href={googleOauthPath}>追加</a></li>
-        <li><a href="#">出退勤一覧(TODO)</a></li>
+        <li><Link to="/event">出退勤一覧</Link></li>
       </ul>
     </li>
   );

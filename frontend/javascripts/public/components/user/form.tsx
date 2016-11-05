@@ -52,12 +52,24 @@ export default class extends React.Component<Props, {}> {
       <div className="col-md-12">
         <div className="form-group">
           <label>名前</label>
-          <input type="text" className="form-control" placeholder="名前" value={user.name} onChange={this.handleChangeName} />
+          <input
+            type="text"
+            className="form-control"
+            placeholder="名前"
+            value={user.name}
+            onChange={this.handleChangeName}
+          />
           <small className="form-text text-muted">自由な名前をつけてください。</small>
         </div>
         <div className="form-group">
           <label>メアド</label>
-          <input type="text" className="form-control" placeholder="○○○@framelunch.jp" value={user.email} onChange={this.handleChangeEMail} />
+          <input
+            type="text"
+            className="form-control"
+            placeholder="○○○@framelunch.jp"
+            value={user.email}
+            onChange={this.handleChangeEMail}
+          />
           <small className="form-text text-muted">メールアドレスを入力してください。</small>
         </div>
 

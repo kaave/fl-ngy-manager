@@ -18,3 +18,26 @@ body {
 *::after {
   box-sizing: border-box;
 }
+
+/*
+ * event
+ */
+.event {
+  &__header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  &__prev-month,
+  &__next-month {
+    cursor: pointer;
+  }
+
+  &__row {
+    &--start,
+    &--end {
+      font-weight: 700;
+    }
+  }
+}

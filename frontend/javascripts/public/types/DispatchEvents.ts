@@ -17,5 +17,7 @@ type DispatchEvents =
   'UpdateDeviceFormTypeCode' |
   'UpdateDeviceFormSource' |
   'ClickSubmitDeviceForm' |
-  'ClickEraseDeviceForm';
+  'ClickEraseDeviceForm' |
+  'ClickEventPrevMonth' |
+  'ClickEventNextMonth';
 export default DispatchEvents;

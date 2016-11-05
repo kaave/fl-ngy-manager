@@ -10,6 +10,8 @@ export const CREATE_EVENT_SUCCESS = `${actionPrefix}CREATE_EVENT_SUCCESS`;
 export const CREATE_EVENT_ERROR = `${actionPrefix}CREATE_EVENT_ERROR`;
 export const UPDATE_FORM_EVENT_AT = `${actionPrefix}UPDATE_FORM_EVENT_AT`;
 export const UPDATE_FORM_USER_ID = `${actionPrefix}UPDATE_FORM_USER_ID`;
+export const PREV_MONTH = `${actionPrefix}PREV_MONTH`;
+export const NEXT_MONTH = `${actionPrefix}NEXT_MONTH`;
 export const ERASE_FORM = `${actionPrefix}ERASE_FORM`;
 
 export const getEvents = createAction<null>(
@@ -50,6 +52,16 @@ export const updateFormName = createAction<string>(
 export const updateFormUrl = createAction<string>(
   UPDATE_FORM_USER_ID,
   (text: string) => text
+);
+
+export const prevMonth = createAction<void>(
+  PREV_MONTH,
+  () => null
+);
+
+export const nextMonth = createAction<void>(
+  NEXT_MONTH,
+  () => null
 );
 
 export const eraseForm = createAction<void>(

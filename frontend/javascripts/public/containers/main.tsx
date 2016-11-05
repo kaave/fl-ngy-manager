@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import * as moment from 'moment';
 
 import * as RadioActions from '../actions/radio';
 import RadioModel from '../models/radio';
@@ -12,7 +13,7 @@ import * as DeviceActions from '../actions/device';
 import { default as DeviceModel, IDeviceSrc } from '../models/device';
 
 import * as EventActions from '../actions/event';
-import { default as EventModel, IEventApi } from '../models/event';
+import { default as EventModel } from '../models/event';
 
 import DispatchEvents from '../types/DispatchEvents';
 
@@ -37,6 +38,7 @@ export interface Props {
   deviceFormModel: DeviceModel;
   deviceList: DeviceModel[];
   eventList: EventModel[];
+  eventYearMonth: moment.Moment;
 }
 
 /*
@@ -137,13 +139,19 @@ export class Main extends React.Component<Props, {}> {
       case 'ClickEraseDeviceForm':
         this.props.dispatch(DeviceActions.eraseForm());
         break;
+      case 'ClickEventPrevMonth':
+        this.props.dispatch(EventActions.prevMonth());
+        break;
+      case 'ClickEventNextMonth':
+        this.props.dispatch(EventActions.nextMonth());
+        break;
       default:
         break;
     }
   }
 
   render(): JSX.Element {
-    const { radioFormModel, radioList, userFormModel, userList, deviceFormModel, deviceList, eventList } = this.props;
+    const { radioFormModel, radioList, userFormModel, userList, deviceFormModel, deviceList, eventList, eventYearMonth } = this.props;
     const props = {
       dispatch: this.dispatch,
       user: userFormModel,
@@ -152,7 +160,8 @@ export class Main extends React.Component<Props, {}> {
       devices: deviceList,
       radio: radioFormModel,
       radios: radioList,
-      events: eventList
+      events: eventList,
+      eventYearMonth
     };
 
     return (

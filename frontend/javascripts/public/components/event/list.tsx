@@ -33,11 +33,11 @@ function EventTable(props: { firstDay: number; lastDate: number; }): JSX.Element
   return (
     <table className="table table-bordered">
       <thead>
-        <tr>
-          <th>&nbsp;</th>
-          <th>&nbsp;</th>
-          <th>出勤</th>
-          <th>退勤</th>
+        <tr className="event__header">
+          <th className="event__header--date">&nbsp;</th>
+          <th className="event__header--day">&nbsp;</th>
+          <th className="event__header--start">出勤</th>
+          <th className="event__header--end">退勤</th>
         </tr>
       </thead>
       <tbody>

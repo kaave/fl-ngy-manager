@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105022711) do
+ActiveRecord::Schema.define(version: 20161106015810) do
 
   create_table "devices", force: :cascade do |t|
     t.string   "name"
@@ -62,6 +62,16 @@ ActiveRecord::Schema.define(version: 20161105022711) do
     t.string   "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "work_events", force: :cascade do |t|
+    t.date     "event_at",   null: false
+    t.integer  "user_id",    null: false
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "event_at"], name: "index_work_events_on_user_id_and_event_at", unique: true
   end
 
 end

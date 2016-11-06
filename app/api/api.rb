@@ -138,36 +138,40 @@ module API
       end
     end
 
-    class EventEntity < Grape::Entity
-      expose :id, :event_at, :user_id
+    class WorkEventEntity < Grape::Entity
+      expose :id, :event_at, :user_id, :start_at, :end_at
     end
 
-    resource :events do
-      desc 'Return all event.'
+    resource :work_events do
+      desc 'Return all work_event.'
       get do
-        present Event.all, with: EventEntity
+        present WorkEvent.all, with: WorkEventEntity
       end
 
-      desc 'Update event'
+      desc 'Create event'
       params do
-        requires :event_at, type: DateTime, desc: 'event_at'
+        requires :event_at, type: Date, desc: 'event_at'
         requires :user_id, type: Integer, desc: 'user_id'
+        requires :start_at, type: DateTime, desc: 'start_at'
+        optional :end_at, type: DateTime, desc: 'end_at'
       end
       post do
-        Event.create(event_at: params[:event_at], user_id: params[:user_id])
+        WorkEvent.create(event_at: params[:event_at], user_id: params[:user_id], start_at: params[:start_at], end_at: params[:end_at])
       end
 
       route_param :id do
         desc 'Update event'
         params do
           requires :id, type: Integer, desc: 'id'
-          requires :event_at, type: String, desc: 'event_at'
+          requires :event_at, type: DateTime, desc: 'event_at'
+          requires :start_at, type: DateTime, desc: 'start_at'
+          optional :end_at, type: DateTime, desc: 'end_at'
         end
         put do
-          event = Event.find(params[:id])
-          event.update({event_at: params[:event_at]})
+          event = WorkEvent.find(params[:id])
+          event.update({event_at: params[:event_at], start_at: params[:start_at], end_at: params[:end_at]})
 
-          present Event.find(params[:id]), with: EventEntity
+          present WorkEvent.find(params[:id]), with: WorkEventEntity
         end
 
         desc 'delete'
@@ -175,7 +179,7 @@ module API
           requires :id, type: Integer, desc: 'UserID'
         end
         delete do
-          Event.find(params[:id]).destroy
+          WorkEvent.find(params[:id]).destroy
         end
       end
     end

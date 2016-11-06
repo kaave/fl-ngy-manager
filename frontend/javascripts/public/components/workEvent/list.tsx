@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as moment from 'moment';
 import { range } from 'lodash';
 
-import EventModel from '../../models/event';
+import EventModel from '../../models/workEvent';
 import UserModel from '../../models/user';
 import DispatchEvents from '../../types/DispatchEvents';
 
@@ -13,9 +13,9 @@ interface IDayInfo {
 }
 
 export interface Props {
-  eventYearMonth: moment.Moment;
+  workEventYearMonth: moment.Moment;
   users: UserModel[];
-  events: EventModel[];
+  workEvents: EventModel[];
   dispatch: (type: DispatchEvents) => void;
 }
 
@@ -77,9 +77,9 @@ export default class extends React.Component<Props, {}> {
   }
 
   render(): JSX.Element {
-    const { users, eventYearMonth } = this.props;
-    const year = eventYearMonth.year();
-    const month = eventYearMonth.month() + 1;
+    const { users, workEventYearMonth } = this.props;
+    const year = workEventYearMonth.year();
+    const month = workEventYearMonth.month() + 1;
     const startDate = moment(new Date(year, month - 1, 1));
     const firstDay = startDate.day();
     const lastDate = startDate.clone().add('month', 1).add('day', -1).date();

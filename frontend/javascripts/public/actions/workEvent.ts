@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import EventModel from '../models/event';
+import EventModel from '../models/workEvent';
 
 const actionPrefix = 'Event_';
 export const GET_EVENTS = `${actionPrefix}GET_EVENTS`;

@@ -1,12 +1,12 @@
 import Radio from './radio';
 import User from './user';
 import Device from './device';
-import Event from './event';
+import WorkEvent from './workEvent';
 
 export default Object.assign(
   {},
   Radio,
   User,
   Device,
-  Event
+  WorkEvent
 );

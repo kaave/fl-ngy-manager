@@ -1,5 +1,5 @@
 import * as fetch from 'isomorphic-fetch';
-import { IEvent } from '../models/event';
+import { IEvent } from '../models/workEvent';
 
 export function index(): Promise<IEvent[]> {
   return fetch('/api/v1/events')

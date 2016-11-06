@@ -12,8 +12,8 @@ import UserModel from '../models/user';
 import * as DeviceActions from '../actions/device';
 import { default as DeviceModel, IDeviceSrc } from '../models/device';
 
-import * as EventActions from '../actions/event';
-import { default as EventModel } from '../models/event';
+import * as WorkEventActions from '../actions/workEvent';
+import { default as WorkEventModel } from '../models/workEvent';
 
 import DispatchEvents from '../types/DispatchEvents';
 
@@ -37,8 +37,8 @@ export interface Props {
   userList: UserModel[];
   deviceFormModel: DeviceModel;
   deviceList: DeviceModel[];
-  eventList: EventModel[];
-  eventYearMonth: moment.Moment;
+  workEventList: WorkEventModel[];
+  workEventYearMonth: moment.Moment;
 }
 
 /*
@@ -61,7 +61,7 @@ export class Main extends React.Component<Props, {}> {
     this.props.dispatch(RadioActions.getRadios());
     this.props.dispatch(UserActions.getUsers());
     this.props.dispatch(DeviceActions.getDevices());
-    this.props.dispatch(EventActions.getEvents());
+    this.props.dispatch(WorkEventActions.getEvents());
 
     this.channel = channel(this.handleDeviceRead);
   }
@@ -140,10 +140,10 @@ export class Main extends React.Component<Props, {}> {
         this.props.dispatch(DeviceActions.eraseForm());
         break;
       case 'ClickEventPrevMonth':
-        this.props.dispatch(EventActions.prevMonth());
+        this.props.dispatch(WorkEventActions.prevMonth());
         break;
       case 'ClickEventNextMonth':
-        this.props.dispatch(EventActions.nextMonth());
+        this.props.dispatch(WorkEventActions.nextMonth());
         break;
       default:
         break;
@@ -151,7 +151,7 @@ export class Main extends React.Component<Props, {}> {
   }
 
   render(): JSX.Element {
-    const { radioFormModel, radioList, userFormModel, userList, deviceFormModel, deviceList, eventList, eventYearMonth } = this.props;
+    const { radioFormModel, radioList, userFormModel, userList, deviceFormModel, deviceList, workEventList, workEventYearMonth } = this.props;
     const props = {
       dispatch: this.dispatch,
       user: userFormModel,
@@ -160,8 +160,8 @@ export class Main extends React.Component<Props, {}> {
       devices: deviceList,
       radio: radioFormModel,
       radios: radioList,
-      events: eventList,
-      eventYearMonth
+      workEvents: workEventList,
+      workEventYearMonth
     };
 
     return (

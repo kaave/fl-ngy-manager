@@ -12,7 +12,7 @@ import RadioList from './public/components/radio/list';
 import RadioForm from './public/components/radio/form';
 import DeviceList from './public/components/device/list';
 import DeviceForm from './public/components/device/form';
-import EventList from './public/components/event/list';
+import WorkEventList from './public/components/workEvent/list';
 import reducers from './public/reducers/';
 import sagas from './public/sagas/';
 import createLogger = require('redux-logger');
@@ -43,7 +43,7 @@ window.addEventListener('DOMContentLoaded', () => {
               <Route path="radio/add" component={RadioForm}/>
               <Route path="device" component={DeviceList}/>
               <Route path="device/add" component={DeviceForm}/>
-              <Route path="event" component={EventList}/>
+              <Route path="event" component={WorkEventList}/>
               <Route path="*" component={RadioList}/>
             </Route>
           </Router>

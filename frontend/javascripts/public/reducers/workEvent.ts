@@ -1,8 +1,8 @@
 import { Action } from 'redux-actions';
 import * as moment from 'moment';
 
-import * as Actions from '../actions/event';
-import { default as EventModel, IEventApi } from '../models/event';
+import * as Actions from '../actions/workEvent';
+import { default as EventModel, IEventApi } from '../models/workEvent';
 
 export function eventList(state: EventModel[] = [], { type, payload }: Action<EventModel | EventModel[] | IEventApi>): EventModel[] {
   switch (type) {

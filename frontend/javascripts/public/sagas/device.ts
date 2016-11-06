@@ -1,24 +1,39 @@
-import { takeLatest } from 'redux-saga';
+import { takeEvery, takeLatest } from 'redux-saga';
 import { call, put, fork } from 'redux-saga/effects';
 import { Action } from 'redux-actions';
 
-import { IEventApi, default as EventModel } from '../models/event';
-import * as EventAction from '../actions/event';
-import * as Api from '../api/event';
+import { IDevice, IDeviceApi, default as DeviceModel } from '../models/device';
+import * as DeviceAction from '../actions/device';
+import * as Api from '../api/device';
 
-function* getAllEvents(action: Action<void>): IterableIterator<any> {
+function* getAllDevices(action: Action<void>): IterableIterator<any> {
   try {
-    const devices: IEventApi[] = yield call(Api.index);
-    yield put(EventAction.getEventsSuccess(devices.map(device => EventModel.parseApiResult(device))));
+    const devices: IDeviceApi[] = yield call(Api.index);
+    yield put(DeviceAction.getDevicesSuccess(devices.map(device => DeviceModel.parseApiResult(device))));
   } catch (e) {
-    yield put(EventAction.getEventsError(e));
+    yield put(DeviceAction.getDevicesError(e));
   }
 }
 
-export function* watchGetEvents(): {} {
-  yield* takeLatest(EventAction.GET_EVENTS, getAllEvents);
+function* createAllDevices(action: Action<DeviceModel>): IterableIterator<any> {
+  try {
+    const model: DeviceModel = action.payload as DeviceModel;
+    const radios: IDevice = yield call(Api.create, model.toFormData());
+    yield put(DeviceAction.createDeviceSuccess(new DeviceModel(radios)));
+  } catch (e) {
+    yield put(DeviceAction.createDeviceError(e));
+  }
+}
+
+export function* watchGetDevices(): {} {
+  yield* takeLatest(DeviceAction.GET_DEVICES, getAllDevices);
+};
+
+export function* watchCreateRadio(): {} {
+  yield* takeEvery(DeviceAction.CREATE_DEVICE, createAllDevices);
 };
 
 export default [
-  fork(watchGetEvents)
+  fork(watchGetDevices),
+  fork(watchCreateRadio)
 ];

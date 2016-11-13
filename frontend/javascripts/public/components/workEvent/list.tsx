@@ -33,11 +33,11 @@ function EventTable(props: { firstDay: number; lastDate: number; }): JSX.Element
   return (
     <table className="table table-bordered">
       <thead>
-        <tr className="event__header">
-          <th className="event__header--date">&nbsp;</th>
-          <th className="event__header--day">&nbsp;</th>
-          <th className="event__header--start">出勤</th>
-          <th className="event__header--end">退勤</th>
+        <tr className="work-event__head">
+          <th className="work-event__head--date">&nbsp;</th>
+          <th className="work-event__head--day">&nbsp;</th>
+          <th className="work-event__head--start">出勤</th>
+          <th className="work-event__head--end">退勤</th>
         </tr>
       </thead>
       <tbody>
@@ -51,11 +51,11 @@ function EventTable(props: { firstDay: number; lastDate: number; }): JSX.Element
 
 function EventRow(props: { dayInfo: IDayInfo, date: number, start?: string, end?: string }): JSX.Element {
   return (
-    <tr className={`event__row day-${props.dayInfo.key.toLowerCase()}`}>
-      <td className={`event__row--date ${props.dayInfo.className}`}>{props.date}</td>
-      <td className={`event__row--day ${props.dayInfo.className}`}>{props.dayInfo.jp}</td>
-      <td className="event__row--start">{props.start || ' '}</td>
-      <td className="event__row--end">{props.end || ' '}</td>
+    <tr className={`work-event__row day-${props.dayInfo.key.toLowerCase()}`}>
+      <td className={`work-event__row--date ${props.dayInfo.className}`}>{props.date}</td>
+      <td className={`work-event__row--day ${props.dayInfo.className}`}>{props.dayInfo.jp}</td>
+      <td className="work-event__row--start">{props.start || ' '}</td>
+      <td className="work-event__row--end">{props.end || ' '}</td>
     </tr>
   );
 }
@@ -86,10 +86,10 @@ export default class extends React.Component<Props, {}> {
 
     return (
       <div className="col-md-12 event__list">
-        <h3 className="event__header">
-          <small className="event__prev-month" onClick={this.handlePrevClick}>&lt; {month === 1 ? 12 : month - 1}月</small>
+        <h3 className="work-event__header">
+          <small className="work-event__prev-month" onClick={this.handlePrevClick}>&lt; {month === 1 ? 12 : month - 1}月</small>
           {year}年 {month}月
-          <small className="event__next-month" onClick={this.handleNextClick}>{month === 12 ? 1 : month + 1}月 &gt;</small>
+          <small className="work-event__next-month" onClick={this.handleNextClick}>{month === 12 ? 1 : month + 1}月 &gt;</small>
         </h3>
         {users.map((user, i) => (
           <div key={i} className="col-md-4">

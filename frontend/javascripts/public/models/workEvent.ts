@@ -1,46 +1,52 @@
-export interface IEvent {
+import * as moment from 'moment';
+
+export interface IWorkEvent {
   id?: number;
   eventAt: Date;
   userId?: number;
+  startAt: Date;
+  endAt?: Date;
 }
 
-export interface IEventApi {
+export interface IWorkEventApi {
   id: number;
-  event_at: Date;
-  user_id?: number;
+  event_at: string;
+  user_id: number;
+  start_at: string;
+  end_at?: string;
 }
 
-export default class Event implements IEvent {
+export default class WorkEvent implements IWorkEvent {
   id?: number;
   eventAt: Date;
   userId?: number;
+  startAt: Date;
+  endAt?: Date;
 
-  constructor(prev?: IEvent) {
+  constructor(prev?: IWorkEvent) {
     this.init(prev);
   }
 
-  init(prev?: IEvent): void {
+  init(prev?: IWorkEvent): void {
     if (prev) {
       this.id = prev.id;
       this.eventAt = prev.eventAt;
       this.userId = prev.userId;
+      this.startAt = prev.startAt;
+      this.endAt = prev.endAt;
     } else {
-      this.eventAt = new Date(2001, 0, 1, 0, 0, 0);
+      const today = moment().toDate();
+      this.eventAt = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
+      this.startAt = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
     }
-  }
-
-  static parse({ id, event_at, user_id }: IEventApi): Event {
-    return new Event({
-      id,
-      eventAt: event_at,
-      userId: user_id
-    });
   }
 
   IsValid(): boolean {
     return (
       this.IsValidId() &&
-      this.IsValidUserId()
+      this.IsValidUserId() &&
+      this.IsValidStartAt() &&
+      this.IsValidEndAt()
     );
   }
 
@@ -52,10 +58,19 @@ export default class Event implements IEvent {
     return this.userId > 0;
   }
 
+  IsValidStartAt(): boolean {
+    return this.eventAt.getTime() <= this.startAt.getTime();
+  }
+
+  IsValidEndAt(): boolean {
+    return this.endAt == null || this.startAt.getTime() < this.endAt.getTime();
+  }
+
   toFormData(): FormData {
     const formData = new FormData();
 
-    formData.append('eventAt', this.eventAt);
+    formData.append('event_at', this.eventAt);
+    formData.append('start_at', this.startAt);
 
     if (this.IsValidId()) {
       formData.append('id', this.id);
@@ -65,22 +80,35 @@ export default class Event implements IEvent {
       formData.append('user_id', this.userId);
     }
 
+    if (this.IsValidEndAt()) {
+      formData.append('end_at', this.endAt);
+    }
+
     return formData;
   }
 
-  static parseApiResult(data: IEventApi): Event {
-    return new Event({
-      id: data.id,
-      eventAt: new Date(data.event_at),
-      userId: data.user_id,
-    });
+  static parseApiResult({ id, event_at, user_id, start_at, end_at }: IWorkEventApi): WorkEvent {
+    const sendData = {
+      id,
+      eventAt: new Date(event_at),
+      userId: user_id,
+      startAt: new Date(start_at)
+    } as IWorkEvent;
+
+    if (end_at) {
+      sendData.endAt = new Date(end_at);
+    }
+
+    return new WorkEvent(sendData);
   }
 
-  toJSON(): IEvent {
-    const result: IEvent = {
+  toJSON(): IWorkEvent {
+    const result: IWorkEvent = {
       id: this.id,
       eventAt: this.eventAt,
-      userId: this.userId
+      userId: this.userId,
+      startAt: this.startAt,
+      endAt: this.endAt
     };
 
     return result;

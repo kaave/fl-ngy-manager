@@ -2,18 +2,18 @@ import { Action } from 'redux-actions';
 import * as moment from 'moment';
 
 import * as Actions from '../actions/workEvent';
-import { default as EventModel, IEventApi } from '../models/workEvent';
+import { default as WorkEventModel, IWorkEventApi } from '../models/workEvent';
 
-export function eventList(state: EventModel[] = [], { type, payload }: Action<EventModel | EventModel[] | IEventApi>): EventModel[] {
+export function workEventList(state: WorkEventModel[] = [], { type, payload }: Action<WorkEventModel | WorkEventModel[] | IWorkEventApi>): WorkEventModel[] {
   switch (type) {
   case Actions.GET_EVENTS_SUCCESS:
-    return payload as EventModel[];
+    return payload as WorkEventModel[];
   default:
     return state;
   }
 }
 
-export function eventYearMonth(state: moment.Moment = moment(), { type, payload }: Action<void>): moment.Moment {
+export function workEventYearMonth(state: moment.Moment = moment(), { type, payload }: Action<void>): moment.Moment {
   switch (type) {
   case Actions.PREV_MONTH:
     return state.clone().add('month', -1);
@@ -25,6 +25,6 @@ export function eventYearMonth(state: moment.Moment = moment(), { type, payload 
 }
 
 export default {
-  eventList,
-  eventYearMonth
+  workEventList,
+  workEventYearMonth
 };
